@@ -1,0 +1,19 @@
+[user]
+	name = Sam Free5ide
+	#name = Sam Frees1de
+	email = snovvcrash@protonmail.com
+[credential]
+	helper = cache
+[core]
+	editor = subl -n -w
+	#autocrlf = input
+	#safecrlf = true
+	autocrlf = false
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p

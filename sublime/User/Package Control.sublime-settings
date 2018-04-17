@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Agila Theme",
+		"Boxy Theme",
+		"Dracula Color Scheme",
+		"HexViewer",
+		"Materialize",
+		"Package Control",
+		"Seti_UI",
+		"Seti_UX",
+		"SublimeREPL"
+	]
+}
