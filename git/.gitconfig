@@ -6,9 +6,8 @@
 	helper = cache
 [core]
 	editor = subl -n -w
-	#autocrlf = input
+	autocrlf = input
 	#safecrlf = true
-	autocrlf = false
 [alias]
 	co = checkout
 	ci = commit
