@@ -2,7 +2,7 @@
 
 # Python
 #alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"
-alias pyclean="find ./ \( -name "__pycache__" -o -name "*.pyc" -o -name "*.pyo" \) -prune -exec rm -rf {} \;"
+alias pyclean="find ./ \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" \) -prune -exec rm -rf {} \;"
 
 # Git
 #alias gs="git status -s"
