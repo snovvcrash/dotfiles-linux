@@ -5,7 +5,7 @@
 alias pyclean="find ./ \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" \) -prune -exec rm -rf {} \;"
 
 # Git
-alias gs="git status -s"
+alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
 alias gc="git commit"
