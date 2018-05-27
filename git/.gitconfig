@@ -1,13 +1,14 @@
 [user]
 	name = Sam Free5ide
-	#name = Sam Frees1de
+	# name = Sam Frees1de
 	email = snovvcrash@protonmail.com
 [credential]
 	helper = cache
 [core]
 	editor = subl -n -w
 	autocrlf = input
-	#safecrlf = true
+	# safecrlf = true
+	# filemode = false
 [alias]
 	co = checkout
 	ci = commit
