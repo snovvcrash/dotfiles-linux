@@ -1,4 +1,4 @@
-# For oh-my-zsh: $ ln -sv $HOME/.dotfiles/system/.alias $HOME/.oh-my-zsh/custom/alias.zsh
+# oh-my-zsh: ln -sv $HOME/.dotfiles/system/.alias $HOME/.oh-my-zsh/custom/alias.zsh
 
 # Python
 #alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"

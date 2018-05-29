@@ -64,6 +64,20 @@ source $HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
 SPACESHIP_BATTERY_SHOW="false"
 
+# Resolve DOTFILES_DIR
+if [ -d "$HOME/.dotfiles" ]; then
+    DOTFILES_DIR="$HOME/.dotfiles"
+else
+    echo "Unable to find dotfiles, exiting."
+    return
+fi
+
+# Source dotfiles
+for DOTFILE in "$DOTFILES_DIR"/system/.{alias,export,virtualenv}; do
+    [ -f "$DOTFILE" ] && . "$DOTFILE"
+done
+
+# Color
 color () {
     # echo ""
     #black

@@ -1,5 +1,3 @@
-# For oh-my-zsh: $ ln -sv $HOME/.dotfiles/system/.virtualenv $HOME/.oh-my-zsh/custom/virtualenv.zsh
-
 # virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
 source /usr/local/bin/virtualenvwrapper.sh
