@@ -1,3 +1,4 @@
 [
-	{ "keys": ["ctrl+q"], "command": "repl_open", "args": {"cmd": ["python3", "-i", "-u"], "cwd": "$file_path", "encoding": "utf8", "extend_env": {"PYTHONIOENCODING": "utf-8"}, "external_id": "python", "syntax": "Packages/Python/Python.tmLanguage", "type": "subprocess"} }
+	{ "keys": ["ctrl+q"], "command": "repl_open", "args": {"cmd": ["python3", "-i", "-u"], "cwd": "$file_path", "encoding": "utf8", "extend_env": {"PYTHONIOENCODING": "utf-8"}, "external_id": "python", "syntax": "Packages/Python/Python.tmLanguage", "type": "subprocess"} },
+	{ "keys": ["ctrl+1"], "command": "open_file", "args": {"file": "${packages}/User/Anaconda.sublime-settings"} }
 ]
