@@ -1,0 +1,16 @@
+{
+	"enable_signatures_tooltip": false,
+
+	"python_interpreter": "python3",
+
+	"anaconda_linting": true,
+	"anaconda_linting_behaviour": "load-save",
+	"anaconda_gutter_theme": "bright",
+	"anaconda_linter_mark_style": "solid_underline",
+	
+	"pep8_ignore":
+	[
+		"W191",
+		"E309"
+	],
+}
