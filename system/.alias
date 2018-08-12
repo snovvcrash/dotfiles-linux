@@ -1,5 +1,3 @@
-# oh-my-zsh: ln -sv $HOME/.dotfiles/system/.alias $HOME/.oh-my-zsh/custom/alias.zsh
-
 # Navigating around
 alias pls='sudo `fc -ln -1`'
 
