@@ -4,6 +4,7 @@ alias pls='sudo `fc -ln -1`'
 # Python
 # alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"
 alias pyclean="find ./ \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" \) -prune -exec rm -rf {} \;"
+alias bpython3="python3 -m bpython"
 
 # Git
 alias gs="git status"
