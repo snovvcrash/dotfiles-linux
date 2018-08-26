@@ -1,0 +1,3 @@
+Host *
+    controlmaster auto
+    controlpath /tmp/ssh-%r@%h:%p
