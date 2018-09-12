@@ -66,7 +66,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
 
 # Spaceship prompt
 source $HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme
