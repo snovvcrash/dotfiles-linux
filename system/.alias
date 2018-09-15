@@ -15,4 +15,4 @@ alias gd="git diff"
 alias go="git checkout"
 
 # Other tools
-alias xclip="xclip -selection c"
+alias xclip="xclip -i -sel clipboard"
