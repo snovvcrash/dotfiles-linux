@@ -1,3 +1,4 @@
 Host *
-    controlmaster auto
-    controlpath /tmp/ssh-%r@%h:%p
+    ControlPath $HOME/.ssh/controlmasters/%r@%h:%p
+    ControlMaster auto
+    ControlPersist 10m
