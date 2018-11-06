@@ -59,14 +59,14 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-# Disable changing directory without "cd" command
-unsetopt AUTO_CD
-
 source $ZSH/oh-my-zsh.sh
 
 ######################################################################
 
 # User configuration
+
+# Disable changing directory without "cd" command
+unsetopt AUTO_CD
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
