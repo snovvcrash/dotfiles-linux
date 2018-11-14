@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Replaces currently installed tmux with tmux version ${VERSION}
+
 if [[ "$#" -ne 1 ]]; then
 	echo "Usage: bash $0 VERSION"
 	exit
