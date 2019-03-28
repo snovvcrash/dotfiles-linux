@@ -1,0 +1,2 @@
+rm $HOME/.profile
+ln -sv $HOME/.dotfiles/system/.profile $HOME/.profile

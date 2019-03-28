@@ -53,6 +53,7 @@ ZSH_THEME="spaceship"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    tmux
     virtualenv
     virtualenvwrapper
     zsh-autosuggestions
@@ -77,16 +78,3 @@ SPACESHIP_BATTERY_SHOW="false"
 SPACESHIP_DIR_COLOR="cyan"
 SPACESHIP_VENV_SYMBOL="🐍 "
 SPACESHIP_VENV_COLOR="green"
-
-# Resolve DOTFILES_DIR
-if [ -d "$HOME/.dotfiles" ]; then
-    DOTFILES_DIR="$HOME/.dotfiles"
-else
-    echo "Unable to find dotfiles, exiting."
-    return
-fi
-
-# Source dotfiles
-for DOTFILE in "$DOTFILES_DIR"/system/.*; do
-    [ -f "$DOTFILE" ] && . "$DOTFILE"
-done
