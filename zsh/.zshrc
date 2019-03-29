@@ -64,8 +64,6 @@ source $ZSH/oh-my-zsh.sh
 
 ######################################################################
 
-# User configuration
-
 # Disable changing directory without "cd" command
 unsetopt AUTO_CD
 
@@ -78,3 +76,16 @@ SPACESHIP_BATTERY_SHOW="false"
 SPACESHIP_DIR_COLOR="cyan"
 SPACESHIP_VENV_SYMBOL="🐍 "
 SPACESHIP_VENV_COLOR="green"
+
+# Resolve DOTFILES_DIR
+if [ -d "$HOME/.dotfiles" ]; then
+    DOTFILES_DIR="$HOME/.dotfiles"
+else
+    echo "Unable to find dotfiles, exiting."
+    return
+fi
+
+# Source dotfiles
+for DOTFILE in "$DOTFILES_DIR"/system/.*; do
+    [ -f "$DOTFILE" ] && . "$DOTFILE"
+done
