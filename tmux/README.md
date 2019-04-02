@@ -1,0 +1,11 @@
+tmux
+==========
+## Get config
+```
+$ curl https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/master/tmux/tmux-cfg.sh | bash
+```
+
+## Install or update
+```
+$ curl https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/master/tmux/tmux-upd.sh | sudo bash -s -- <VERSION>
+```

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Replaces currently installed tmux with tmux version ${VERSION}
+# Usage: ./tmux-upd.sh <VERSION>
 
 if [[ "$#" -ne 1 ]]; then
 	echo "Usage: bash $0 VERSION"
@@ -9,8 +9,8 @@ fi
 
 VERSION="$1"
 
-sudo apt remove tmux -y
-sudo apt install wget tar xclip libevent-dev libncurses-dev -y
+apt remove -y tmux
+apt install -y wget tar xclip libevent-dev libncurses-dev
 
 wget "https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
 tar xf tmux-${VERSION}.tar.gz
@@ -18,12 +18,16 @@ rm -f tmux-${VERSION}.tar.gz
 cd tmux-${VERSION}
 ./configure
 make
-sudo make install
+make install
 
 cd ..
-sudo rm -rf /usr/local/src/tmux-*
-sudo mv tmux-${VERSION} /usr/local/src
-sudo killall -9 tmux
+rm -rf /usr/local/src/tmux-*
+mv tmux-${VERSION} /usr/local/src
+killall -9 tmux
 
-sudo ln -sv /usr/local/bin/tmux /usr/bin/tmux
+ln -sv /usr/local/bin/tmux /usr/bin/tmux
 
+# tmux-cfg.sh (get config)
+rm -rf ${HOME}/.tmux*
+git clone "https://github.com/tmux-plugins/tpm" ${HOME}/.tmux/plugins/tpm
+wget "https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/master/tmux/.tmux.conf" -O ${HOME}/.tmux.conf
