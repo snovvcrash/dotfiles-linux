@@ -1,2 +1,2 @@
-rm $HOME/.zshrc
-ln -sv $HOME/.dotfiles/zsh/.zshrc $HOME/.zshrc
+rm ${HOME}/.zshrc
+ln -sv ${HOME}/.dotfiles/zsh/.zshrc ${HOME}/.zshrc
