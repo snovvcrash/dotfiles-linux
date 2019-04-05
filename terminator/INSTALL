@@ -1,5 +1,0 @@
-mkdir -p ${HOME}/.config/terminator/plugins
-wget https://git.io/v5Zww -O ${HOME}"/.config/terminator/plugins/terminator-themes.py"
-
-rm ${HOME}/.config/terminator/config
-ln -sv ${HOME}/.dotfiles/terminator/config ${HOME}/.config/terminator/config
