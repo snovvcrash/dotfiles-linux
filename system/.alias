@@ -1,6 +1,11 @@
 # Navigating around
 alias pls='sudo `fc -ln -1`'
 
+# Headers
+headers() {
+	sed -i "1i# Done $(date +'%FT%H%M%S') as: $(fc -ln -1 | awk '{ $1=$1; }1')" $1
+}
+
 # Python
 # alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"
 alias pyclean="find ./ \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" \) -prune -exec rm -rf {} \;"
