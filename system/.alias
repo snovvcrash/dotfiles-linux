@@ -1,5 +1,6 @@
 # Navigating around
 alias pls='sudo `fc -ln -1`'
+alias ll='ls -la'
 
 # Headers
 done_as() {
