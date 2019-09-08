@@ -1,2 +1,2 @@
 rm ${HOME}/.gdbinit
-ln -sv ${HOME}/.gdbinit ${HOME}/.dotfiles/git/.gdbinit
+ln -sv ${HOME}/.dotfiles/gdb/.gdbinit ${HOME}/.gdbinit
