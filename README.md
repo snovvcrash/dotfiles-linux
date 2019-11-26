@@ -1,7 +1,21 @@
 dotfiles-linux (WSL)
 ==========
 
-Init:
+## Clone
 
-$ git clone https://github.com/snovvcrash/dotfiles-windows
-$ ln -sv ${USERPROFILE}/.dotfiles/wsl ${HOME}/.dotfiles
+```
+~$ git clone https://github.com/snovvcrash/dotfiles-windows .dotfiles
+~$ ln -sv ${USERPROFILE}/.dotfiles/wsl ${HOME}/.dotfiles
+```
+
+## Init
+
+```
+~/.dotfiles$ git submodule update --init --remote
+```
+
+## Update
+
+```
+
+```
