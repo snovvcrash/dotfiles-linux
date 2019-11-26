@@ -4,3 +4,6 @@ export SSH="$HOME/.ssh"
 # Golang
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:/usr/local/go/bin"
+
+# WSL
+USERPROFILE=$(wslpath "$(winenv USERPROFILE)")

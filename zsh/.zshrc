@@ -1,3 +1,5 @@
+ZSH_DISABLE_COMPFIX=true
+
 # If you come from bash you might have to change your $PATH.
 # export PATH="$HOME/bin:/usr/local/bin:$PATH"
 
@@ -7,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -68,14 +70,14 @@ source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 
 # Spaceship prompt
-source $HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme
-SPACESHIP_BATTERY_SHOW="false"
-SPACESHIP_DIR_COLOR="cyan"
-SPACESHIP_VENV_SYMBOL="🐍 "
-SPACESHIP_VENV_COLOR="green"
+#source $HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+#SPACESHIP_BATTERY_SHOW="false"
+#SPACESHIP_DIR_COLOR="cyan"
+#SPACESHIP_VENV_SYMBOL="🐍 "
+#SPACESHIP_VENV_COLOR="green"
 
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then

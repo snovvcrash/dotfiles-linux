@@ -25,3 +25,9 @@ alias ra="ranger"
 
 # Other tools
 alias xclip="xclip -i -sel clipboard"
+alias subl="'/mnt/e/Programs/Sublime Text 3/subl.exe'"
+
+# WSL
+winenv() {
+	cmd.exe /C "echo %$*%" | tr -d '\r'
+}
