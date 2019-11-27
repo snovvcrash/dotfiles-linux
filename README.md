@@ -22,6 +22,6 @@ dotfiles-linux (WSL)
 ~/.dotfiles/wsl$ git commit -am 'Changes in wsl repo'
 ~/.dotfiles/wsl$ git push origin wsl
 ~/.dotfiles/wsl$ cd ..
-~/.dotfiles$ git commit -am 'Chnages in dotfiles-windows repo'
+~/.dotfiles$ git commit -am 'Changes in dotfiles-windows repo'
 ~/.dotfiles$ git push origin master
 ```
