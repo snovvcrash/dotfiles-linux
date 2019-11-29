@@ -72,13 +72,6 @@ unsetopt AUTO_CD
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 
-# Spaceship prompt
-#source $HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme
-#SPACESHIP_BATTERY_SHOW="false"
-#SPACESHIP_DIR_COLOR="cyan"
-#SPACESHIP_VENV_SYMBOL="🐍 "
-#SPACESHIP_VENV_COLOR="green"
-
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
     DOTFILES_DIR="$HOME/.dotfiles"
