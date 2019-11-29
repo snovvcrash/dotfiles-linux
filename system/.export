@@ -6,4 +6,4 @@ export GOPATH="$HOME/code/go"
 export PATH="$PATH:/usr/local/go/bin"
 
 # WSL
-USERPROFILE=$(wslpath "$(winenv USERPROFILE)")
+USERPROFILE=$(wslpath `winenv USERPROFILE`)

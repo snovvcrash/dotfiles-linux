@@ -1,18 +1,22 @@
-# Navigating around
-alias pls='sudo `fc -ln -1`'
-alias ll='ls -la'
+# ------------------- Navigating around --------------------
 
-# Headers
+alias pls='sudo `fc -ln -1`'
+alias ll="ls -la"
+
+# ------------------------- Headers -------------------------
+
 done_as() {
 	sed -i "1i# Done $(date +'%FT%H%M%S') as: $(fc -ln -1 | awk '{ $1=$1; }1')" $1
 }
 
-# Python
+# ------------------------- Python -------------------------
+
 # alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"
 alias pyclean="find . \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" -o -name \"build\" -o -name \"dist\" -o -name \"*.egg-info\" \) -prune -exec rm -rf {} \;"
 alias bpython3="python3 -m bpython"
 
-# Git
+# -------------------------- Git ---------------------------
+
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
@@ -20,14 +24,34 @@ alias gc="git commit"
 alias gd="git diff"
 alias gco="git checkout"
 
-# Ranger
+# ------------------------- Ranger -------------------------
+
 alias ra="ranger"
 
-# Other tools
-alias xclip="xclip -i -sel clipboard"
-alias subl="'/mnt/e/Programs/Sublime Text 3/subl.exe'"
+# ---------------------- Other tools -----------------------
 
-# WSL
+alias xclip="xclip -i -sel clipboard"
+
+# -------------------------- WSL ---------------------------
+
 winenv() {
 	cmd.exe /C "echo %$*%" | tr -d '\r'
+}
+
+winrun() {
+	if [ "$#" -ne 2 ]; then
+		echo "[winrun] Usage: $0 <EXEC> <ARG>"
+	else
+		EXEC="$1"
+		ARG="$2"
+
+		if [[ "$ARG" == /* ]]; then
+			if [[ "$ARG" == /mnt/* ]]; then
+				echo "[winrun] Error: use relative path"
+			else
+				ARG="\\\\wsl$\\Ubuntu\\${ARG:1}"
+				cmd.exe /C "$EXEC" "$ARG" | tr -d '\r'
+			fi
+		fi
+	fi
 }
