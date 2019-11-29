@@ -1,7 +1,8 @@
 [user]
-	# name = Sam Free5ide
-	# name = Sam Frees1de
-	name = Sam Fre3side
+	name = Sam Free5ide  # Linux
+	# name = Sam Fr3eside  # Windows
+	# name = Sam Fre3side  # WSL
+	# name = Sam Frees1de  # Other
 	email = snovvcrash@protonmail.ch
 [credential]
 	helper = cache
