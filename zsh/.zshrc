@@ -77,11 +77,14 @@ SPACESHIP_DIR_COLOR="cyan"
 SPACESHIP_VENV_SYMBOL="🐍 "
 SPACESHIP_VENV_COLOR="green"
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
     DOTFILES_DIR="$HOME/.dotfiles"
 else
-    echo "Unable to find dotfiles, exiting."
+    echo "Unable to find dotfiles, exiting..."
     return
 fi
 

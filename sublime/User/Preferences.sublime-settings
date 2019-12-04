@@ -5,6 +5,7 @@
 	[
 		"Vintage"
 	],
-	"scroll_past_end": false,
+	"scroll_past_end": true,
+	"scroll_speed": 0,
 	"theme": "Adaptive.sublime-theme"
 }
