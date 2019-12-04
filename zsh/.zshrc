@@ -72,11 +72,14 @@ unsetopt AUTO_CD
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
     DOTFILES_DIR="$HOME/.dotfiles"
 else
-    echo "Unable to find dotfiles, exiting."
+    echo "Unable to find dotfiles, exiting..."
     return
 fi
 
