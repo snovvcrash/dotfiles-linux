@@ -5,5 +5,9 @@ export SSH="$HOME/.ssh"
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:/usr/local/go/bin"
 
+# VcXsrv
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
 # WSL
-USERPROFILE=$(wslpath `winenv USERPROFILE`)
+export USERPROFILE=$(wslpath `winenv USERPROFILE`)

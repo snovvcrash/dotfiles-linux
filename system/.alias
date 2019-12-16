@@ -30,7 +30,7 @@ alias ra="ranger"
 
 # ---------------------- Other tools -----------------------
 
-alias xclip="xclip -i -sel clipboard"
+alias xclip="xclip -i -selection clipboard"
 
 # -------------------------- WSL ---------------------------
 
