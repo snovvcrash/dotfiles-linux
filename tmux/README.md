@@ -1,10 +1,13 @@
 tmux
 ==========
 
+```
+$ $ sudo apt install curl -y
+```
+
 ## Get config
 
 ```
-$ sudo apt install git -y
 $ curl -s https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/master/tmux/tmux-cfg.sh | bash
 ```
 
