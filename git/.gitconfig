@@ -7,7 +7,7 @@
 [credential]
 	helper = cache
 [core]
-	editor = subl -n -w
+	editor = vim
 	autocrlf = input
 	# safecrlf = true
 	# filemode = false

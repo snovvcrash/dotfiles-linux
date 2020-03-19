@@ -8,4 +8,4 @@ cp "$ZSH/themes/robbyrussell.zsh-theme" "$ZSH_CUSTOM/themes/robbyrussell.zsh-the
 vi ${HOME}/.oh-my-zsh/plugins/virtualenv/virtualenv.plugin.zsh
 
 # Stash local changes and update oh-my-zsh:
-# ==> cd ~/.oh-my-zsh && git stash && upgrade_oh_my_zsh && git stash pop
+# ==> cd ~/.oh-my-zsh && git stash && upgrade_oh_my_zsh && git stash pop && cd -
