@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt install git -y
+sudo apt install wget git xclip -y
 
 rm -rf ${HOME}/.tmux*
 git clone "https://github.com/tmux-plugins/tpm" ${HOME}/.tmux/plugins/tpm

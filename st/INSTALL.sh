@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# Vanilla: git clone https://git.suckless.org/st ~/st-vanilla
+# Vanilla: git clone https://git.suckless.org/st /opt/st-vanilla
 
-sudo apt install git libx11-dev libxft-dev suckless-tools -y
-git clone https://github.com/LukeSmithxyz/st ~/st
-cd ~/st
-sudo make install
+apt install git libx11-dev libxft-dev suckless-tools -y
+git clone https://github.com/LukeSmithxyz/st /opt/st
+cd /opt/st
+make install
 
 cat << EOT > .Xresources
 !! Transparency (0-1):
-st.alpha: 1
+st.alpha: 0.95
 
 !! Set a default font and font size as below:
 st.font: Monospace-11;
@@ -56,4 +56,6 @@ st.font: Monospace-11;
 EOT
 
 xrdb .Xresources
-# sudo update-alternatives --config x-terminal-emulator
+
+# update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/st 1
+# update-alternatives --config x-terminal-emulator
