@@ -10,7 +10,7 @@ fi
 VERSION="$1"
 
 apt remove -y tmux
-apt install -y wget tar xclip git libevent-dev libncurses-dev
+apt install -y wget git xclip tar libevent-dev libncurses-dev
 
 wget "https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
 tar xf tmux-${VERSION}.tar.gz
@@ -30,7 +30,7 @@ ln -sv /usr/local/bin/tmux /usr/bin/tmux
 # tmux-cfg.sh (get config)
 rm -rf ${HOME}/.tmux*
 git clone "https://github.com/tmux-plugins/tpm" ${HOME}/.tmux/plugins/tpm
-wget "https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/master/tmux/.tmux.conf" -O ${HOME}/.tmux.conf
+wget "https://raw.githubusercontent.com/snovvcrash/dotfiles-linux/wsl/tmux/.tmux.conf" -O ${HOME}/.tmux.conf
 
 # Fix permissions
 USER_HOME=`getent passwd ${SUDO_USER} | cut -d: -f6`
