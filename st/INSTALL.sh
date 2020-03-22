@@ -6,8 +6,9 @@ apt install git libx11-dev libxft-dev suckless-tools -y
 git clone https://github.com/LukeSmithxyz/st /opt/st
 cd /opt/st
 make install
+mv .Xdefaults .Xdefaults.bak
 
-cat << EOT > .Xresources
+cat << EOT > .Xdefaults
 !! Transparency (0-1):
 st.alpha: 0.92
 
@@ -55,7 +56,7 @@ st.font: Monospace-11;
 *.color15:       #eff0eb
 EOT
 
-xrdb .Xresources
+xrdb .Xdefaults
 
 # update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/st 1
 # update-alternatives --config x-terminal-emulator
