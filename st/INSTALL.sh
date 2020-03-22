@@ -9,7 +9,7 @@ make install
 
 cat << EOT > .Xresources
 !! Transparency (0-1):
-st.alpha: 0.95
+st.alpha: 0.92
 
 !! Set a default font and font size as below:
 st.font: Monospace-11;
@@ -59,3 +59,5 @@ xrdb .Xresources
 
 # update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/st 1
 # update-alternatives --config x-terminal-emulator
+# + create launcher (Panel)
+# + change Ctrl-Alt-T behavior
