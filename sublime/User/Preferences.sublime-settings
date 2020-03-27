@@ -3,7 +3,6 @@
 	"font_size": 11,
 	"ignored_packages":
 	[
-		"Boxy Theme",
 		"Vintage"
 	],
 	"scroll_past_end": true,
