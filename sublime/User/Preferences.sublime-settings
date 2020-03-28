@@ -3,11 +3,6 @@
 	"font_size": 11,
 	"ignored_packages":
 	[
-		"A File Icon",
-		"Dracula Color Scheme",
-		"Materialize",
-		"RawLineEdit",
-		"SublimeREPL",
 		"Vintage"
 	],
 	"scroll_past_end": true,

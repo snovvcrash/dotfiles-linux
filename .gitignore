@@ -1,5 +1,7 @@
 # Sublime Text
 sublime/User*
-!sublime/User/*.sublime-keymap
-!sublime/User/*.sublime-settings
+!sublime/User/Anaconda.sublime-settings
+!sublime/User/Default\ \(Linux\).sublime-keymap
+!sublime/User/Package\ Control.sublime-settings
+!sublime/User/Preferences.sublime-settings
 !sublime/User/Python3.sublime-build
