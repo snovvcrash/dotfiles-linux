@@ -2,14 +2,17 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
-		"Boxy Theme"
+		"A File Icon",
+		"Dracula Color Scheme",
+		"Materialize",
+		"RawLineEdit",
+		"SublimeREPL"
 	],
 	"installed_packages":
 	[
 		"A File Icon",
 		"Agila Theme",
 		"Anaconda",
-		"Boxy Theme",
 		"DiffTabs",
 		"Dracula Color Scheme",
 		"HexViewer",
