@@ -17,6 +17,7 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 UsePAM yes
+UseDNS no
 
 X11Forwarding yes
 PrintMotd no
