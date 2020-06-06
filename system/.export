@@ -5,9 +5,21 @@ export SSH="$HOME/.ssh"
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:/usr/local/go/bin"
 
-# VcXsrv
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-
 # WSL
 export USERPROFILE=$(wslpath `winenv USERPROFILE`)
+
+# WSL 1 specific settings
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+    if [ "$(umask)" = "0000" ]; then
+        umask 0022
+    fi
+
+    # VcXsrv
+    export DISPLAY=:0.0
+fi
+
+# WSL 2 specific settings
+if grep -q "microsoft" /proc/version &>/dev/null; then
+    # VcXsrv
+    export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0.0"
+fi

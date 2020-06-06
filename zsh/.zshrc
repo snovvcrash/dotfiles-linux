@@ -55,9 +55,6 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    tmux
-    virtualenv
-    virtualenvwrapper
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
