@@ -1,10 +1,6 @@
 tmux
 ==========
 
-```
-$ sudo apt install curl -y
-```
-
 ## Get config
 
 ```
