@@ -9,7 +9,7 @@ colorecho() {
 
 # Python2 (interpreter + pip)
 #sudo apt install python2.7 -y && sudo ln -sv /usr/bin/python2.7 /usr/bin/python
-curl https://bootstrap.pypa.io/get-pip.py |python
+curl https://bootstrap.pypa.io/get-pip.py |sudo python
 
 # Python3 (pip + venv)
 sudo apt install python3-pip -y
