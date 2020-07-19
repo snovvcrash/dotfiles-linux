@@ -71,7 +71,7 @@ ZSH_THEME="gianu"
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=magenta"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
 
 source $ZSH/oh-my-zsh.sh
 
