@@ -12,4 +12,5 @@ sudo apt install flameshot -y
 sudo apt install snapd -y
 sudo service snapd start
 
+sudo snap install codium
 sudo snap install mdless
