@@ -1,4 +1,0 @@
-# virtualenvwrapper
-export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
-#source /usr/local/bin/virtualenvwrapper.sh
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh

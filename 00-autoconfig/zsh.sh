@@ -14,7 +14,7 @@ sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions
 colorecho '[*] Re-login'
 
 cp "$ZSH/themes/robbyrussell.zsh-theme" "$ZSH_CUSTOM/themes/robbyrussell.zsh-theme"
-colorecho '[*] replace "%c" with "%(4~|%-1~/…/%2~|%3~)"'
+sed -i 's/%c/%(4~|%-1~\/…\/%2~|%3~)/g' "$ZSH_CUSTOM/themes/robbyrussell.zsh-theme"
 
 cat << 'EOT' >> ~/.zshrc
 
