@@ -54,8 +54,6 @@ ZSH_THEME="spaceship"
 plugins=(
     git
     tmux
-    virtualenv
-    virtualenvwrapper
     zsh-autosuggestions
     zsh-syntax-highlighting
 )

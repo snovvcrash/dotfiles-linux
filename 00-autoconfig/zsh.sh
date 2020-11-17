@@ -22,6 +22,10 @@ sed -i 's/%c/%(4~|%-1~\/…\/%2~|%3~)/g' "$ZSH_CUSTOM/themes/robbyrussell.zsh-th
 
 cat << 'EOT' >> ~/.zshrc
 
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
+
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
     DOTFILES_DIR="$HOME/.dotfiles"

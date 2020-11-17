@@ -16,4 +16,15 @@ sudo apt install python3-pip -y
 sudo python3 -m pip install --upgrade pip
 sudo apt install python3-venv -y
 
-sudo python3 -m pip install pipenv pipx poetry
+# Pipenv
+sudo python3 -m pip install pipenv
+
+# Pipx
+sudo python3 -m pip install pipx
+pipx ensurepath
+
+# Poetry
+sudo python3 -m pip install poetry
+mkdir $ZSH_CUSTOM/plugins/poetry
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+colorecho "Add poetry to your list of plugins in .zshrc"
