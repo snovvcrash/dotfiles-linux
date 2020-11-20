@@ -1,7 +1,10 @@
 [
-	{ "keys": ["ctrl+1"], "command": "repl_open", "args": {"cmd": ["python3", "-i", "-u"], "cwd": "$file_path", "encoding": "utf8", "extend_env": {"PYTHONIOENCODING": "utf-8"}, "external_id": "python", "syntax": "Packages/Python/Python.tmLanguage", "type": "subprocess"} },
 	{ "keys": ["ctrl+0"], "command": "open_file", "args": {"file": "${packages}/User/Anaconda.sublime-settings"} },
+	{ "keys": ["ctrl+1"], "command": "repl_open", "args": {"cmd": ["python3", "-i", "-u"], "cwd": "$file_path", "encoding": "utf8", "extend_env": {"PYTHONIOENCODING": "utf-8"}, "external_id": "python", "syntax": "Packages/Python/Python.tmLanguage", "type": "subprocess"} },
 
 	{ "keys": ["ctrl+q"], "command": "toggle_record_macro" },
-	{ "keys": ["ctrl+alt+q"], "command": "run_macro" }
+	{ "keys": ["ctrl+alt+q"], "command": "run_macro" },
+
+	{ "keys": ["ctrl+alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["ctrl+alt+down"], "command": "select_lines", "args": {"forward": true} }
 ]

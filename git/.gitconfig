@@ -11,6 +11,8 @@
 	autocrlf = input
 	# safecrlf = true
 	# filemode = false
+[pull]
+	rebase = false
 [alias]
 	co = checkout
 	ci = commit
