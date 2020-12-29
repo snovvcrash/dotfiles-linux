@@ -8,7 +8,7 @@ colorecho() {
 }
 
 ZSH="${HOME}/.oh-my-zsh"
-ZSSH_CUSTOM="$ZSH/custom"
+ZSH_CUSTOM="$ZSH/custom"
 
 sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting

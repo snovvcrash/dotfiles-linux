@@ -7,6 +7,9 @@ colorecho() {
 	echo -e "[*] ${RED}${1}${NOCOLOR}"
 }
 
+ZSH="${HOME}/.oh-my-zsh"
+ZSH_CUSTOM="$ZSH/custom"
+
 # Python3 (pip + venv)
 sudo apt install python3-pip -y
 sudo python3 -m pip install --upgrade pip
@@ -25,6 +28,6 @@ pipx ensurepath
 
 # Poetry
 sudo python3 -m pip install poetry
-mkdir $ZSH_CUSTOM/plugins/poetry
-poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+mkdir "$ZSH_CUSTOM/plugins/poetry"
+poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
 colorecho "Add poetry to your list of plugins in .zshrc"
