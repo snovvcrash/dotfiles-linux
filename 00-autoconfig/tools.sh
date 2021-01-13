@@ -2,6 +2,7 @@
 
 # apt
 
+sudo apt install mlocate -y
 sudo apt install timeshift -y
 sudo apt install keepassx -y
 sudo apt install xfce4-clipman -y
