@@ -8,38 +8,17 @@ colorecho() {
 }
 
 ZSH="${HOME}/.oh-my-zsh"
-ZSH_CUSTOM="$ZSH/custom"
+ZSH_CUSTOM="${ZSH}/custom"
+DOTFILES_DIR="${HOME}/.dotfiles"
 
 sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
-sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/g' ~/.zshrc
+
+cp "${DOTFILES_DIR}/zsh/themes/fino.zsh-theme" "{ZSH_CUSTOM}/themes"
+
+rm ${HOME}/.zshrc
+ln -sv ${HOME}/.dotfiles/zsh/.zshrc ${HOME}/.zshrc
+
 colorecho 'Re-login'
 colorecho 'Run "sudo chsh -s `which zsh`"'
-
-cp "$ZSH/themes/robbyrussell.zsh-theme" "$ZSH_CUSTOM/themes/robbyrussell.zsh-theme"
-sed -i 's/%c/%(4~|%-1~\/…\/%2~|%3~)/g' "$ZSH_CUSTOM/themes/robbyrussell.zsh-theme"
-
-cat << 'EOT' >> ~/.zshrc
-
-# Unset autocd
-unsetopt autocd
-
-# Init Bash autocomplete
-autoload -U bashcompinit
-bashcompinit
-eval "$(register-python-argcomplete pipx)"
-
-# Resolve DOTFILES_DIR
-if [ -d "$HOME/.dotfiles" ]; then
-    DOTFILES_DIR="$HOME/.dotfiles"
-else
-    echo "Unable to find dotfiles, exiting..."
-    return
-fi
-
-# Source dotfiles
-for DOTFILE in "$DOTFILES_DIR"/system/.*; do
-    [ -f "$DOTFILE" ] && . "$DOTFILE"
-done
-EOT
