@@ -26,10 +26,10 @@ local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 
 if lsof -tac script "$(tty)" > /dev/null; then
-	PROMPT="╭─[%D{%d/%m} %D{%k:%M}]* %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info}
+	PROMPT="╭─${FG[246]}[%D{%d/%m} %D{%k:%M}]* %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info}
 ╰─${prompt_char}%{$reset_color%} "
 else
-	PROMPT="╭─[%D{%d/%m} %D{%k:%M}] %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info}
+	PROMPT="╭─${FG[246]}[%D{%d/%m} %D{%k:%M}] %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info}
 ╰─${prompt_char}%{$reset_color%} "
 fi
 
