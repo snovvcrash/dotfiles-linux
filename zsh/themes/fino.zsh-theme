@@ -12,16 +12,20 @@
 # Also borrowing from http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 
 function virtualenv_prompt_info {
-  [[ -n ${VIRTUAL_ENV} ]] || return
-  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+	[[ -n ${VIRTUAL_ENV} ]] || return
+	echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
 }
 
 function prompt_char {
   command git branch &>/dev/null && echo '⠠⠵' || echo '○'
 }
 
-function box_name {
-  [ -f ~/.box-name ] && cat ~/.box-name || echo ${SHORT_HOST:-$HOST}
+function user_name {
+	[ -f ~/.zsh-un ] && cat ~/.zsh-un || echo $n
+}
+
+function host_name {
+	[ -f ~/.zsh-hn ] && cat ~/.zsh-hn || echo ${SHORT_HOST:-$HOST}
 }
 
 local ruby_env='$(ruby_prompt_info)'
@@ -30,10 +34,10 @@ local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 
 if lsof -tac script "$(tty)" > /dev/null; then
-    PROMPT="╭─sn🥶vvcr💥sh ${FG[244]}on ${FG[033]}$(box_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} %{$FG[244]%}at%{$reset_color%} [%D{%d/%m} %D{%k:%M}]*
+	PROMPT="╭─$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} %{$FG[244]%}at%{$reset_color%} [%D{%d/%m} %D{%k:%M}]*
 ╰─${prompt_char}%{$reset_color%} "
 else
-    PROMPT="╭─sn🥶vvcr💥sh ${FG[244]}on ${FG[033]}$(box_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} %{$FG[244]%}at%{$reset_color%} [%D{%d/%m} %D{%k:%M}]
+	PROMPT="╭─$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} %{$FG[244]%}at%{$reset_color%} [%D{%d/%m} %D{%k:%M}]
 ╰─${prompt_char}%{$reset_color%} "
 fi
 
