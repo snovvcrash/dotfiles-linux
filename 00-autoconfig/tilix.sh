@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-# Good color themes: Nightlion V2, Snazzy
+# Themes:
+#   https://github.com/storm119/Tilix-Themes/blob/master/Themes.md
+#   https://github.com/isacikgoz/gogh-to-tilix
+
+# Some good color themes: Nightlion V2, Orchis, Snazzy
 
 sudo apt install tilix -y
 mkdir -p ~/.config/tilix/schemes
