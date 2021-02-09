@@ -17,7 +17,7 @@ sudo apt install python3-venv -y
 
 # Python2 (interpreter + pip)
 #sudo apt install python2.7 -y && sudo ln -sv /usr/bin/python2.7 /usr/bin/python
-curl https://bootstrap.pypa.io/get-pip.py | sudo python
+curl https://bootstrap.pypa.io/2.7/get-pip.py | sudo python
 
 # Pipenv
 sudo python3 -m pip install pipenv
