@@ -20,22 +20,22 @@ local git_info='$(git_prompt_info)'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 
-PROMPT="╭─${FG[208]}$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[247]}[%D{%d/%m} %D{%k:%M}]"
+PROMPT="╭─${FG[208]}$(user_name) ${FG[240]}on ${FG[033]}$(host_name) ${FG[240]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[240]}at ${FG[137]}[%D{%d/%m} %D{%k:%M}]"
 
 if lsof -tac script "$(tty)" > /dev/null; then
-	PROMPT+="${FG[124]}*%{$reset_color%}"
+	PROMPT+="${FG[124]}*"
 fi
 
-PROMPT+=$'\n'"╰─${prompt_char}%{$reset_color%} "
+PROMPT+="%{$reset_color%}"$'\n'"╰─${prompt_char} "
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" ${FG[244]}via%{$reset_color%} ${FG[196]}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" ${FG[240]}via%{$reset_color%} ${FG[196]}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="${FG[178]}✘"
 ZSH_THEME_GIT_PROMPT_CLEAN="${FG[040]}✔"
 
-ZSH_THEME_RUBY_PROMPT_PREFIX=" ${FG[244]}using${FG[118]} "
+ZSH_THEME_RUBY_PROMPT_PREFIX=" ${FG[240]}using${FG[118]} "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}💎"
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-ZSH_THEME_VIRTUALENV_PREFIX=" ${FG[244]}using${FG[118]} "
+ZSH_THEME_VIRTUALENV_PREFIX=" ${FG[240]}using${FG[118]} "
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}🐍"

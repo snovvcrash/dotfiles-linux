@@ -110,6 +110,9 @@ source $ZSH/oh-my-zsh.sh
 # Disable changing directory without "cd" command
 unsetopt autocd
 
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+
 # Init Bash autocomplete
 autoload -U bashcompinit
 bashcompinit
