@@ -7,3 +7,6 @@ export PATH="$PATH:/usr/local/go/bin"
 
 # Ruby (MSF)
 export DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1
+
+# pipx
+export PATH="$HOME/.local/bin:$PATH"
