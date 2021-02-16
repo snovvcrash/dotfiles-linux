@@ -15,6 +15,7 @@ sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 
+for theme in "${DOTFILES_DIR}/zsh/themes/"*; do ln -sv "${theme}" "${ZSH_CUSTOM}/themes"
 cp "${DOTFILES_DIR}/zsh/themes/"* "${ZSH_CUSTOM}/themes"
 
 rm ${HOME}/.zshrc

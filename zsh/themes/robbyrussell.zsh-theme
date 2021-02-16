@@ -1,7 +1,7 @@
 PROMPT="[%D{%d}|%D{%k:%M}]"
 
 if lsof -tac script "$(tty)" > /dev/null; then
-	PROMPT+="${FG[124]}*%{$reset_color%}"
+	PROMPT+="${FG[maroon]}*%{$reset_color%}"
 fi
 
 PROMPT+=' %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%(4~|%-1~/…/%2~|%3~)%{$reset_color%} $(git_prompt_info)'
