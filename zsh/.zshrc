@@ -23,6 +23,9 @@ unsetopt autocd
 autoload -U bashcompinit
 bashcompinit
 
+# Stop zsh from eating space before pipe symbol?
+ZLE_REMOVE_SUFFIX_CHARS=""
+
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[default]=none
@@ -68,21 +71,20 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'  # select when using 256-color scheme
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=8      # select when using   8-color scheme
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
-    DOTFILES_DIR="$HOME/.dotfiles"
+	DOTFILES_DIR="$HOME/.dotfiles"
 else
-    echo "Unable to find dotfiles, exiting..."
-    return
+	echo "Unable to find dotfiles, exiting..."
+	return
 fi
 
 # Source dotfiles
 for DOTFILE in "$DOTFILES_DIR"/system/.*; do
-    [ -f "$DOTFILE" ] && . "$DOTFILE"
+	[ -f "$DOTFILE" ] && . "$DOTFILE"
 done
