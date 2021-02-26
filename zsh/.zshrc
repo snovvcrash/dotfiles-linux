@@ -68,7 +68,8 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'  # select when using 256-color scheme
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=8      # select when using   8-color scheme
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
