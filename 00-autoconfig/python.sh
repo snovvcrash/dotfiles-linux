@@ -28,9 +28,6 @@ pipx ensurepath
 
 # Poetry
 sudo python3 -m pip install --ignore-installed poetry
-mkdir "$ZSH_CUSTOM/plugins/poetry"
-poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
-colorecho "Add poetry to your list of plugins in .zshrc"
 
 # bpython
 sudo apt install bpython -y
