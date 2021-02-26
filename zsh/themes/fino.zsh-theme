@@ -23,7 +23,7 @@ local prompt_char='$(prompt_char)'
 PROMPT="╭─${FG[208]}$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[137]}[%D{%d/%m} %D{%k:%M}]"
 
 if lsof -tac script "$(tty)" > /dev/null; then
-	PROMPT+="${FG[124]}*"
+	PROMPT+="${FG[160]}*"
 fi
 
 PROMPT+="%{$reset_color%}"$'\n'"╰─${prompt_char} "
