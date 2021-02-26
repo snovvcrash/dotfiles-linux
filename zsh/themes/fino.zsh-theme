@@ -20,7 +20,8 @@ local git_info='$(git_prompt_info)'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 
-PROMPT="╭─${FG[208]}$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[137]}[%D{%d/%m} %D{%k:%M}]"
+PROMPT="╭─${FG[044]}$(user_name) ${FG[244]}on ${FG[033]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[137]}[%D{%d/%m} %D{%k:%M}]"
+RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
 if lsof -tac script "$(tty)" > /dev/null; then
 	PROMPT+="${FG[160]}*"
