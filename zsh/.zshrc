@@ -71,6 +71,7 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 # zsh-autosuggestions
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'  # choose when using 256-color theme
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 # fzf
