@@ -4,13 +4,23 @@
 	name = Sam Fre3side  # WSL
 	# name = Sam Frees1de  # Other
 	email = snovvcrash@protonmail.ch
+	signingkey = snovvcrash@protonmail.ch
+
 [credential]
 	helper = cache
+
 [core]
 	editor = vim
 	autocrlf = input
 	# safecrlf = true
 	# filemode = false
+
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgsign = true
+
 [alias]
 	co = checkout
 	ci = commit
