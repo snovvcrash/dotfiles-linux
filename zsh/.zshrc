@@ -12,6 +12,9 @@ plugins=(
 	zsh-autosuggestions
 )
 
+# Disable URL string auto escape when pasting without quotes
+DISABLE_MAGIC_FUNCTIONS=true
+
 source $ZSH/oh-my-zsh.sh
 
 ######################### User configuration #########################
@@ -76,6 +79,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fzcode() {
+	print -z `[ -f ~/.fzcode/ppn ] && cat ~/.fzcode/ppn | fzf --tac`
+}
 
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
