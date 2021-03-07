@@ -81,7 +81,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 fzcode() {
-	print -z `[ -f ~/.fzcode/ppn ] && cat ~/.fzcode/ppn | fzf --tac`
+	print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac`
 }
 
 # Resolve DOTFILES_DIR
