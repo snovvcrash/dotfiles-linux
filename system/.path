@@ -1,0 +1,7 @@
+# pipx
+export PATH="$HOME/.local/bin:$PATH"
+
+# Golang
+export GOPATH="$HOME/code/go"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/usr/local/go/bin"
