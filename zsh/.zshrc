@@ -26,8 +26,11 @@ unsetopt autocd
 autoload -U bashcompinit
 bashcompinit
 
-# Stop zsh from eating space before pipe symbol?
+# Stop zsh from eating space before pipe symbol
 ZLE_REMOVE_SUFFIX_CHARS=""
+
+# Limit max string length for highlighting
+ZSH_HIGHLIGHT_MAXLENGTH=300
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
