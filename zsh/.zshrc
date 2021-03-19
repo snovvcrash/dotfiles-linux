@@ -30,7 +30,7 @@ bashcompinit
 ZLE_REMOVE_SUFFIX_CHARS=""
 
 # Limit max string length for highlighting
-ZSH_HIGHLIGHT_MAXLENGTH=300
+ZSH_HIGHLIGHT_MAXLENGTH=500
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
