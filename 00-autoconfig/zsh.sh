@@ -23,5 +23,5 @@ done
 rm ${HOME}/.zshrc
 ln -sv ${HOME}/.dotfiles/zsh/.zshrc ${HOME}/.zshrc
 
-colorecho 'Re-login'
 colorecho 'Run "chsh -s `which zsh`"'
+colorecho 'Re-login'
