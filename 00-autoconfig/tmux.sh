@@ -10,3 +10,6 @@ cmake .
 make
 sudo make install
 cd -
+
+touch ${HOME}/.hushlogin
+touch /root/.hushlogin
