@@ -12,4 +12,4 @@ sudo make install
 cd -
 
 touch ${HOME}/.hushlogin
-touch /root/.hushlogin
+sudo touch /root/.hushlogin
