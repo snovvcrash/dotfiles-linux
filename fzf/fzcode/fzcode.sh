@@ -15,8 +15,9 @@ parse_ghpages_posts() {
 }
 
 parse_ppn() {
+	shopt -s globstar dotglob
 	git clone https://github.com/snovvcrash/PPN /tmp/PPN
-	for f in /tmp/PPN/**/*.md; do
+	for f in /tmp/PPN/pentest/**/*.md; do
 		dos2unix $f
 		./extract_code_blocks_from_md.py $f >> ~/.fzcode/ppn
 	done
