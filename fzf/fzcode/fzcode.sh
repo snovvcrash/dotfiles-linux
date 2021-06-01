@@ -2,7 +2,8 @@
 
 # Usage: ./fzcode.sh
 
-mkdir -p /tmp/fzcode ~/.fzcode
+rm -rf /tmp/{fzcode,PPN} ~/.fzcode
+mkdir /tmp/fzcode ~/.fzcode
 
 parse_ghpages_posts() {
 	files=`curl -s "https://api.github.com/repos/$1/$1.github.io/git/trees/master?recursive=1" | jq '.tree[] .path' | grep '_posts/' | awk -F/ '{ print $2 }' | tr -d '"'`
@@ -14,12 +15,12 @@ parse_ghpages_posts() {
 }
 
 parse_ppn() {
-	curl -sL "https://github.com/snovvcrash/PPN/raw/master/README.md" > /tmp/fzcode/ppn
-	dos2unix /tmp/fzcode/ppn
-	./extract_code_blocks_from_md.py /tmp/fzcode/ppn > ~/.fzcode/ppn
+	git clone https://github.com/snovvcrash/PPN /tmp/PPN
+	for f in /tmp/PPN/**/*.md; do
+		dos2unix $f
+		./extract_code_blocks_from_md.py $f >> ~/.fzcode/ppn
+	done
 }
 
-parse_ghpages_posts snovvcrash
+#parse_ghpages_posts snovvcrash
 parse_ppn
-
-rm -rf /tmp/fzcode
