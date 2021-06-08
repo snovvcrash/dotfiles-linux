@@ -1,0 +1,19 @@
+[/]
+quake-specific-monitor=0
+terminal-title-show-when-single=false
+warn-vte-config-issue=false
+window-style='borderless'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#282A36'
+background-transparency-percent=43
+badge-color='#282A36'
+badge-color-set=true
+bold-color-set=false
+cursor-colors-set=false
+dim-transparency-percent=0
+foreground-color='#EFF0EB'
+highlight-colors-set=false
+palette=['#282A36', '#FF5C57', '#5AF78E', '#F3F99D', '#57C7FF', '#FF6AC1', '#9AEDFE', '#F1F1F0', '#686868', '#FF5C57', '#5AF78E', '#F3F99D', '#57C7FF', '#FF6AC1', '#9AEDFE', '#EFF0EB']
+use-theme-colors=false
+visible-name='Default'
