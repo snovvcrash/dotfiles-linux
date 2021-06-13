@@ -1,6 +1,9 @@
 # pipx
 export PATH="$HOME/.local/bin:$PATH"
 
+# snap
+export PATH="$PATH:/snap/bin"
+
 # Golang
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:$GOPATH/bin"
