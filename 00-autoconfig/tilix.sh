@@ -15,5 +15,3 @@ chmod +x install.sh
 ./install.sh ~/.config/tilix/schemes
 cd -
 rm -rf /tmp/isacikgoz/gogh-to-tilix
-
-dconf load /com/gexperts/Tilix/ < ~/.dotfiles/tilix/tilix.dconf
