@@ -20,8 +20,11 @@ alias gc="git commit"
 alias gd="git diff"
 alias gco="git checkout"
 
+# Bat
+alias bat="batcat"
+
 # Ranger
 alias ra="ranger"
 
-# Other tools
+# Other
 alias xclip="xclip -i -sel clipboard"

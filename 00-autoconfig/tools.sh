@@ -4,6 +4,7 @@
 
 sudo apt install mlocate -y
 sudo apt install ripgrep -y
+sudo apt install bat -y
 sudo apt install xfce4-clipman -y
 sudo apt install flameshot -y
 sudo apt install keepassx -y
