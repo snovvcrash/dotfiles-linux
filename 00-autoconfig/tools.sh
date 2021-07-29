@@ -14,6 +14,9 @@ sudo apt install timeshift -y
 
 sudo apt install snapd -y
 sudo service snapd start
+udo apparmor_parser -r /etc/apparmor.d/*snap-confine*
+sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*
+#export PATH="$PATH:/snap/bin"
 
 sudo snap install codium --classic
 sudo snap install mdless
