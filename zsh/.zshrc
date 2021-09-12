@@ -96,6 +96,6 @@ else
 fi
 
 # Source dotfiles
-for DOTFILE in "$DOTFILES_DIR"/system/.*; do
+for DOTFILE in "$DOTFILES_DIR"/system/*; do
 	[ -f "$DOTFILE" ] && . "$DOTFILE"
 done
