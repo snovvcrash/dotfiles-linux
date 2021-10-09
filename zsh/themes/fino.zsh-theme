@@ -4,7 +4,7 @@ function virtualenv_prompt_info {
 }
 
 function prompt_char {
-  command git branch &>/dev/null && echo '⠠⠵' || echo '○'
+  command git branch &>/dev/null && echo '⠠⠵' || echo "%F{red}$%F{reset}"
 }
 
 function user_name {
@@ -20,14 +20,14 @@ local git_info='$(git_prompt_info)'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 
-PROMPT="╭─${FG[044]}$(user_name) ${FG[244]}on ${FG[147]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[254]}[%D{%d/%m} %D{%k:%M}]"
+PROMPT="${FG[044]}$(user_name) ${FG[244]}on ${FG[147]}$(host_name) ${FG[244]}in %B${FG[226]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[254]}[%D{%d/%m} %D{%k:%M}]"
 RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
 if lsof -tac script "$(tty)" > /dev/null; then
 	PROMPT+="${FG[160]}*"
 fi
 
-PROMPT+="%{$reset_color%}"$'\n'"╰─${prompt_char} "
+PROMPT+="%{$reset_color%}"$'\n'"${prompt_char} "
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" ${FG[244]}via%{$reset_color%} ${FG[196]}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
