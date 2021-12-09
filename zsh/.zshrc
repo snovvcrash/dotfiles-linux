@@ -87,6 +87,10 @@ fzcode() {
 	print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac`
 }
 
+SharpCollection() {
+	print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line >"; done | fzf --tac`
+}
+
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
 	DOTFILES_DIR="$HOME/.dotfiles"
