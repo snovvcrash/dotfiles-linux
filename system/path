@@ -8,3 +8,6 @@ export PATH="$PATH:/snap/bin"
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/usr/local/go/bin"
+
+# Nim
+export PATH="$HOME/.nimble/bin:$PATH"

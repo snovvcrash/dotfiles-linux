@@ -3,7 +3,7 @@ alias pls='sudo `fc -ln -1`'
 alias ll='ls -la'
 
 # Network
-ipself() { if [ $# -eq 0 ]; then IF="eth0"; else IF=$1; fi; ifconfig $IF | grep 'inet ' | awk '{print $2}' }
+ipself() { if [ $# -eq 0 ]; then IF="eth0"; else IF=$1; fi; ifconfig $IF | grep 'inet ' | awk '{print $2}' }; complete -W "`find /sys/class/net/ -mindepth 1 -printf '%f '`" ipself
 ipof() { ping -c1 $1 | grep "bytes from" | awk '{print $4}' | sed 's/.$//' }
 
 # Headers
