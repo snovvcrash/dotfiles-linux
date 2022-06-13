@@ -78,7 +78,7 @@ ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 # zsh-autosuggestions
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"  # choose when using 256-color theme
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
