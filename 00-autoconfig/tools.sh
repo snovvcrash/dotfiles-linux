@@ -26,6 +26,10 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt update
 sudo apt install sublime-text -y
 
+# eget
+curl https://zyedidia.github.io/eget.sh | sh
+sudo mv eget /usr/local/bin
+
 # -- snap ------------------------------------------------------------
 
 sudo apt install snapd -y
