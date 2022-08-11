@@ -4,7 +4,7 @@ if lsof -tac script "$(tty)" > /dev/null; then
 	PROMPT+="${FG[160]}*%{$reset_color%}"
 fi
 
-PROMPT+=' %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[yellow]%}%(4~|%-1~/…/%2~|%3~)%{$reset_color%} $(git_prompt_info)'
+PROMPT+=' %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%(4~|%-1~/…/%2~|%3~)%{$reset_color%} $(git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
