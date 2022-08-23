@@ -7,6 +7,7 @@
 # Some good color themes: Nightlion V2, Orchis, Snazzy
 
 cd tmp
+# TODO: try https://github.com/gnunn1/tilix/releases/download/1.9.4/tilix-1.9.4_x86_64-linux-gnu.zip
 wget https://github.com/gnunn1/tilix/releases/download/1.9.3/tilix.zip
 sudo unzip tilix.zip -d /
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
