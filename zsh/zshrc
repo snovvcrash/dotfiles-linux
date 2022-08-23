@@ -6,6 +6,7 @@ ZSH_THEME="fino"
 
 plugins=(
 	git
+	ssh-agent
 	tmux
 	fzf
 	zsh-syntax-highlighting
