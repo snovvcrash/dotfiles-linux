@@ -21,7 +21,7 @@ for theme in "${DOTFILES_DIR}/zsh/themes/"*; do
 done
 
 rm ${HOME}/.zshrc
-ln -sv ${HOME}/.dotfiles/zsh/.zshrc ${HOME}/.zshrc
+ln -sv ${HOME}/.dotfiles/zsh/zshrc ${HOME}/.zshrc
 
 colorecho 'Run "chsh -s `which zsh`"'
 colorecho 'Re-login'
