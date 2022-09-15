@@ -1,6 +1,6 @@
 function virtualenv_prompt_info {
-	[[ -n ${VIRTUAL_ENV} ]] || return
-	echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+    [[ -n ${VIRTUAL_ENV} ]] || return
+    echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
 }
 
 function prompt_char {
@@ -8,11 +8,11 @@ function prompt_char {
 }
 
 function user_name {
-	[ -f ~/.zsh_un ] && cat ~/.zsh_un || echo "%n"
+    [ -f ~/.zsh_un ] && cat ~/.zsh_un || echo "%n"
 }
 
 function host_name {
-	[ -f ~/.zsh_hn ] && cat ~/.zsh_hn || echo ${SHORT_HOST:-$HOST}
+    [ -f ~/.zsh_hn ] && cat ~/.zsh_hn || echo ${SHORT_HOST:-$HOST}
 }
 
 local ruby_env='$(ruby_prompt_info)'
@@ -23,8 +23,8 @@ local prompt_char='$(prompt_char)'
 PROMPT="${FG[044]}$(user_name) ${FG[244]}on ${FG[147]}$(host_name) ${FG[244]}in %B${FG[227]}%~%b${git_info}${ruby_env}${virtualenv_info} ${FG[244]}at ${FG[252]}[%D{%d/%m} %D{%k:%M}]"
 RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
-if lsof -tac script "$(tty)" > /dev/null; then
-	PROMPT+="${FG[160]}*"
+if [ "$(ps -ocommand= $PPID | awk '{print $1}')" = 'script' ]; then
+    PROMPT+="${FG[160]}*"
 fi
 
 PROMPT+="%{$reset_color%}"$'\n'"${prompt_char} "
