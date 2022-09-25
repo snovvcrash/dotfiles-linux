@@ -1,6 +1,9 @@
 # Navigating around
 alias pls='sudo `fc -ln -1`'
 alias ll='ls -la'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Network
 ipself() { if [ $# -eq 0 ]; then IF="eth0"; else IF=$1; fi; ifconfig $IF | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1 }; complete -W "`find /sys/class/net/ -mindepth 1 -printf '%f '`" ipself
