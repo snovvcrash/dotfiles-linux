@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-sudo apt install wget git xclip cmake -y
+sudo apt install wget git xclip g++ cmake -y
 rm -rf ${HOME}/.tmux*
 git clone "https://github.com/tmux-plugins/tpm" ${HOME}/.tmux/plugins/tpm
-ln -sv ${HOME}/.dotfiles/tmux/.tmux.conf ${HOME}/.tmux.conf
+ln -sv ${HOME}/.dotfiles/tmux/tmux.conf ${HOME}/.tmux.conf
 git clone "https://github.com/thewtex/tmux-mem-cpu-load" ${HOME}/.tmux/plugins/tmux-mem-cpu-load
 cd ${HOME}/.tmux/plugins/tmux-mem-cpu-load
 cmake .
