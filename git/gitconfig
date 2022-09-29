@@ -1,8 +1,5 @@
 [user]
-	name = Sam Free5ide  # Linux
-	# name = Sam Fr3eside  # Windows
-	# name = Sam Fre3side  # WSL
-	# name = Sam Frees1de  # Other
+	name = Sam Freeside
 	email = snovvcrash@protonmail.ch
 	signingkey = snovvcrash@protonmail.ch
 
