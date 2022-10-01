@@ -94,6 +94,7 @@ else
 	return
 fi
 
+#echo -e '\n# tools\nexport PATH="$PATH'`find ~/tools /opt -maxdepth 1 -type d -printf ":%p"`'"' > ~/.dotfiles/system/tools
 # Source dotfiles
 for DOTFILE in "$DOTFILES_DIR"/system/*; do
 	[ -f "$DOTFILE" ] && . "$DOTFILE"
