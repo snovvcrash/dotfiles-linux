@@ -1,5 +1,11 @@
 Host *
-    AddKeysToAgent yes    
+    IgnoreUnknown UseKeychain
+    AddKeysToAgent yes
+    UseKeychain yes
     ControlPath ~/.ssh/controlmasters/%r@%h:%p
     ControlMaster auto
     ControlPersist 10m
+Host gh
+    User git
+    HostName github.com
+    IdentityFile ~/.ssh/id_github
