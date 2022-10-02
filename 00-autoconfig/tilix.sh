@@ -6,14 +6,16 @@
 
 # Some good color themes: Nightlion V2, Orchis, Snazzy
 
-cd tmp
-wget https://github.com/gnunn1/tilix/releases/download/1.9.4/tilix-1.9.4_x86_64-linux-gnu.zip -O tilix.zip
-unzip tilix.zip
-sudo cp tilix-1.9.4/bin/tilix /usr/bin/
-sudo cp -r tilix-1.9.4/share/* /usr/share/
-sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
-rm -rf tilix-1.9.4 tilix.zip
-cd -
+if ! sudo apt install tilix; then
+	cd tmp
+	wget https://github.com/gnunn1/tilix/releases/download/1.9.4/tilix-1.9.4_x86_64-linux-gnu.zip -O tilix.zip
+	unzip tilix.zip
+	sudo cp tilix-1.9.4/bin/tilix /usr/bin/
+	sudo cp -r tilix-1.9.4/share/* /usr/share/
+	sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+	rm -rf tilix-1.9.4 tilix.zip
+	cd -
+fi
 
 sudo apt install dconf-editor dconf-cli -y
 
