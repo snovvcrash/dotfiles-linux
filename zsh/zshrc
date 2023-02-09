@@ -83,8 +83,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fzcode() { print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac` }
-SharpCollection() { print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line >"; done | fzf --tac` }
+#fzcode() { print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac --cycle --height=~50% --color=16` }
+SharpCollection() { print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line -o"; done | fzf --tac --cycle --height=~50% --color=16` }
+Feroxbuster-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "feroxbuster -w $line -A -k -r -t 15 -n -u"; done | fzf --tac --cycle --height=~50% --color=16` }
+Ffuf-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "ffuf -w $line -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' -ic -sf -r -c -t 15 -u"; done | fzf --tac --cycle --height=~50% --color=16` }
+Httpx-p() { print -z `(echo 'httpx -sc -fr -location -title -server -td -method -ip -cname -cdn -p "80,81,443,1080,3000,3128,7001,7002,8080,8443,8888" -t 15 -l'; echo 'httpx -sc -fr -location -title -server -td -method -ip -cname -cdn -t 15 -l') | fzf --tac --cycle --height=~50% --color=16` }
 
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
