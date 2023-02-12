@@ -29,6 +29,7 @@ sudo apt install sublime-text -y
 # eget
 curl https://zyedidia.github.io/eget.sh | sh
 sudo mv eget /usr/local/bin
+eget -qs linux/amd64 "ipinfo/cli" --to /tmp && sudo dpkg -i /tmp/ipinfo_*linux_amd64 && rm /tmp/ipinfo_*linux_amd64
 
 # -- snap ------------------------------------------------------------
 
