@@ -13,4 +13,4 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/.nimble/bin:$PATH"
 
 # tools
-export PATH="$PATH:/home/snovvcrash/tools:/home/snovvcrash/tools/evil-winrm:/home/snovvcrash/tools/chisel:/opt:/opt/sublime_text:/opt/microsoft:/opt/paloaltonetworks"
+echo -e '\n# tools\nexport PATH="$PATH'`find ~/tools /opt -maxdepth 1 -type d -printf ":%p"`'"' > ~/.dotfiles/system/tools
