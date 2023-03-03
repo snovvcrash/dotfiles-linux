@@ -17,6 +17,9 @@ PPN() {
     popd
 }
 
+# script
+Script() { script "${1}"`date "+%FT%H%M%S"`.script }
+
 # fzf-based
 #fzcode() { print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac --cycle --height=~50% --color=16` }
 SharpCollection() { print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line -o ${line#*/}"; done | fzf --tac --cycle --height=~50% --color=16` }
