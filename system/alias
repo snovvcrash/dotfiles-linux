@@ -24,5 +24,8 @@ alias bat="batcat"
 # Ranger
 alias ra="ranger"
 
+# AppArmor
+alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* && sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*'
+
 # Other
 alias xclip="xclip -i -sel clipboard"
