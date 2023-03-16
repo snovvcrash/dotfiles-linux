@@ -12,10 +12,13 @@ alias bpython3="python3 -m bpython"
 
 # Git
 alias gs="git status"
+alias gs-fm="git -c core.fileMode=false status"
 alias ga="git add"
 alias gb="git branch"
 alias gc="git commit"
+alias gc-fm="git -c core.fileMode=false commit"
 alias gd="git diff"
+alias gd-fm="git -c core.fileMode=false diff"
 alias gco="git checkout"
 
 # Bat

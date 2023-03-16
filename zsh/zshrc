@@ -96,3 +96,8 @@ fi
 for DOTFILE in "$DOTFILES_DIR"/system/*; do
 	[ -f "$DOTFILE" ] && . "$DOTFILE"
 done
+
+
+# Generated for pdtm. Do not edit.
+export PATH=$PATH:/home/snovvcrash/.pdtm/go/bin
+
