@@ -45,3 +45,29 @@ sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*
 
 sudo snap install codium --classic
 sudo snap install mdless
+
+# -- src -------------------------------------------------------------
+
+# Obfuscator-LLVM 13.x
+git clone -b llvm-13.x --single-branch https://github.com/heroims/obfuscator ~/tools/ollvm && cd ~/tools/ollvm
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_NEW_PASS_MANAGER=OFF ../llvm
+sed -i 's/LLVM_TOOL_CLANG_BUILD:BOOL=OFF/LLVM_TOOL_CLANG_BUILD:BOOL=ON/g' CMakeCache.txt
+sed -i "s|LLVM_EXTERNAL_CLANG_SOURCE_DIR:PATH=|LLVM_EXTERNAL_CLANG_SOURCE_DIR:PATH=`realpath ../clang`|g" CMakeCache.txt
+make -j7
+## Backup & replace clang bins
+sudo mv /usr/bin/clang /usr/bin/clang.bak
+sudo mv /usr/bin/clang++ /usr/bin/clang++.bak
+sudo cp bin/clang /usr/bin/clang
+sudo cp bin/clang++ /usr/bin/clang++
+## Wclang (cross-compile with clang on Linux/Unix for Windows)
+git clone https://github.com/tpoechtrager/wclang ~/tools/wclang && cd ~/tools/wclang
+cmake -DCMAKE_INSTALL_PREFIX=_prefix_ .
+make && make install
+export PATH="`pwd`/_prefix_/bin:$PATH"
+## Backup & replace clang libs
+sudo cp -R /lib/llvm-13/lib/clang/13.0.1/include/ /lib/llvm-13/lib/clang/13.0.1/include.backup/
+sudo cd ~/tools/ollvm/build/lib/clang/13.0.1/
+sudo cp -R include/ /lib/llvm-13/lib/clang/13.0.1/
+## Check
+x86_64-w64-mingw32-clang++ -v
