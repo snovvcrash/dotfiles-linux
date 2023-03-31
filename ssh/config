@@ -9,16 +9,3 @@ Host gh
     User git
     HostName github.com
     IdentityFile ~/.ssh/id_github
-Host gh2
-    User git
-    HostName github.com
-    IdentityFile ~/.ssh/id_github_ThatFinn
-Host ares
-    User snovvcrash
-    HostName 192.168.53.60
-    IdentityFile ~/.ssh/id_ares
-Host cthulhu
-    User snovvcrash
-    HostName 176.124.215.91
-    Port 302
-    IdentityFile ~/.ssh/id_cthulhu
