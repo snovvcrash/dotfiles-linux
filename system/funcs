@@ -12,8 +12,9 @@ Sshpass-p() { print -z "sshpass -p '' ssh -oStrictHostKeyChecking=no" }
 PPN() {
     rm -rf ~/PPN
     git clone https://github.com/snovvcrash/PPN ~/PPN
-    #pushd ~/PPN
-    #rm -rf .git docs
+    pushd ~/PPN
+    git update-index --skip-worktree docs/{_config.yml,README.md}
+    rm -rf docs
     popd
 }
 
