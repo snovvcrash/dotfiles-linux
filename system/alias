@@ -31,7 +31,8 @@ alias ra="ranger"
 alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* && sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*'
 
 # ProxyChains
-alias proxy="proxychains4 -q -f ./p"
+alias proxy="proxychains4 -f ./p"
+alias proxyq="proxychains4 -q -f ./p"
 
 # Clipboard
 alias xclip="xclip -i -sel clipboard"
