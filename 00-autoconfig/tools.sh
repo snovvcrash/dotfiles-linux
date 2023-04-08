@@ -34,6 +34,8 @@ sudo mv eget /usr/local/bin
 eget -qs linux/amd64 "ipinfo/cli" --to /tmp && sudo dpkg -i /tmp/ipinfo_*linux_amd64 && rm /tmp/ipinfo_*linux_amd64
 ## gruyere
 mkdir -p ~/tools/gruyere && eget -qs linux/amd64 "savannahostrowski/gruyere" --to ~/tools/gruyere
+## anew
+mkdir -p ~/tools/anew && eget -qs linux/amd64 "tomnomnom/anew" --to ~/tools/anew
 
 # -- snap ------------------------------------------------------------
 
