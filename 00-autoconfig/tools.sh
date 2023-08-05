@@ -36,6 +36,8 @@ eget -qs linux/amd64 "ipinfo/cli" --to /tmp && sudo dpkg -i /tmp/ipinfo_*linux_a
 mkdir -p ~/tools/gruyere && eget -qs linux/amd64 "savannahostrowski/gruyere" --to ~/tools/gruyere
 ## anew
 mkdir -p ~/tools/anew && eget -qs linux/amd64 "tomnomnom/anew" --to ~/tools/anew
+## dex
+mkdir -p ~/tools/dex && eget -qs linux/amd64 "nixxxon/dex" --to ~/tools/dex
 
 # -- snap ------------------------------------------------------------
 
