@@ -28,7 +28,15 @@ crtsh() { curl -s "https://crt.sh/?q=%.${1}&output=json" | jq -r '.[].name_value
 #fzcode() { print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac --cycle --height=~50% --color=16` }
 SharpCollection() { print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line -o ${line#*/}"; done | fzf --tac --cycle --height=~50% --color=16` }
 #SharpCollection() { curl -sSL https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1 | jq -r '.tree[] | select(.path | endswith(".exe")) | .path | split("/") | "\(.[0]) - \(.[1])"' | fzf -m --reverse --height=50% --preview-window=down:5% -d" - " --preview 'echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/"{1}"/"{2}" -o "{2}""' | awk -F' - ' '{print $1,$2}' | while read -r arch filename; do echo; wget https://github.com/Flangvik/SharpCollection/raw/master/$arch/$filename -O $filename; done }
+
 Feroxbuster-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "feroxbuster -w $line -A -k -r -t 15 -n -u"; done | fzf --tac --cycle --height=~50% --color=16` }
+
+# mkdir -p ~/tools/ffuf && cd ~/tools/ffuf && wget https://github.com/six2dez/OneListForAll/raw/main/{onelistforallmicro,onelistforallshort}.txt
 Ffuf-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "ffuf -w $line -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' -ic -sf -r -c -t 15 -u"; done | fzf --tac --cycle --height=~50% --color=16` }
+
 Httpx-p() { print -z `(echo 'httpx -silent -random-agent -sc -fr -location -title -server -td -method -ip -cname -cdn -p "80,81,443,1080,3000,3128,7001,7002,8080,8443,8888" -t 15 -l'; echo 'httpx -silent -random-agent -sc -fr -location -title -server -td -method -ip -cname -cdn -t 15 -l') | fzf --tac --cycle --height=~50% --color=16` }
+
 Katana() { print -z 'TLD="https://"; katana -d 5 -c 50 -p 20 -ef "ttf,woff,svg,jpeg,jpg,png,ico,gif,css" -cs "^.*\.?`echo $TLD | sed' "'s|https\?://||' | sed 's|/.*||'"'`.*$" -u $TLD' }
+
+# Other
+nth() { sed ${1}'q;d' ${2} }
