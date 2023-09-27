@@ -40,3 +40,4 @@ Katana() { print -z 'TLD="https://"; katana -d 5 -c 50 -p 20 -ef "ttf,woff,svg,j
 
 # Other
 nth() { sed ${1}'q;d' ${2} }
+gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }

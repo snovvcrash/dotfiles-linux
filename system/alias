@@ -32,7 +32,6 @@ alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* &&
 
 # ProxyChains
 alias proxy="proxychains4 -f ./p"
-alias proxyq="proxychains4 -q -f ./p"
 
 # Clipboard
 alias xclip="xclip -i -sel clipboard"
