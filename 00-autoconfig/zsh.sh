@@ -20,6 +20,13 @@ for theme in "${DOTFILES_DIR}/zsh/themes/"*; do
 	ln -sv "${theme}" "${ZSH_CUSTOM}/themes/${filename}"
 done
 
+for plugin in "${DOTFILES_DIR}/zsh/plugins/"*; do
+	dirname=`basename "${plugin}" .zsh`
+	filename="${dirname}.plugin.zsh"
+	mkdir -p "${ZSH_CUSTOM}/plugins/${dirname}"
+	ln -sv "${plugin}" "${ZSH_CUSTOM}/plugins/${dirname}/${filename}"
+done
+
 rm ${HOME}/.zshrc
 ln -sv ${HOME}/.dotfiles/zsh/zshrc ${HOME}/.zshrc
 

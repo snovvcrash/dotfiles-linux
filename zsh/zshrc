@@ -11,6 +11,7 @@ plugins=(
 	fzf
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	zsh-transient-prompt
 )
 
 # Disable URL string auto escape when pasting without quotes

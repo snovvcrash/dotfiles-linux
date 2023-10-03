@@ -1,4 +1,4 @@
-PROMPT="[%D{%d}|%D{%k:%M}]"
+PROMPT="${FG[254]}[%D{%d}|%D{%k:%M}]"
 
 if lsof -tac script "$(tty)" > /dev/null; then
     PROMPT+="${FG[160]}*%{$reset_color%}"
