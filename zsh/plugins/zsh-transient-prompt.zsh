@@ -16,7 +16,7 @@ zle-line-init() {
 	local saved_prompt=$PROMPT
 	local saved_rprompt=$RPROMPT
 
-	PROMPT="${FG[249]}[%D{%d}|%D{%k:%M}] ${FG[044]}❯%f "
+	PROMPT="${FG[250]}[%D{%d}|%D{%k:%M}] ${FG[044]}❯%f "
 	RPROMPT=''
 
 	zle .reset-prompt

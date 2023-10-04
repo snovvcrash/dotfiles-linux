@@ -4,7 +4,7 @@ function virtualenv_prompt_info {
 }
 
 function prompt_char {
-  command git branch &>/dev/null && echo '⠠⠵' || echo "%F{red}$%F{reset}"
+    command git branch &>/dev/null && echo '⠠⠵' || echo "%F{red}$%F{reset}"
 }
 
 function user_name {
