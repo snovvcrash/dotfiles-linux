@@ -1,3 +1,5 @@
+# -*- sh -*-
+
 # https://github.com/romkatv/powerlevel10k/issues/888#issuecomment-657969840
 # https://vincent.bernat.ch/en/blog/2021-zsh-transient-prompt
 

@@ -16,7 +16,7 @@ function host_name {
 }
 
 local ruby_env='$(ruby_prompt_info)'
-local git_info='$(git_prompt_info)'
+local git_info='${git_info_msg_0_}'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local prompt_char='$(prompt_char)'
 

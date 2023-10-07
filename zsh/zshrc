@@ -85,6 +85,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# async-git-info
+if [ "$ZSH_THEME" = "fino" ]; then
+	source "$ZSH_CUSTOM/plugins/async-git-info/async-git-info.plugin.zsh"
+fi
+
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
 	DOTFILES_DIR="$HOME/.dotfiles"
