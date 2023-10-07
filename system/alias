@@ -20,6 +20,7 @@ alias gc-fm="git -c core.fileMode=false commit"
 alias gd="git diff"
 alias gd-fm="git -c core.fileMode=false diff"
 alias gco="git checkout"
+alias glo="git log --pretty=format:'%C(yellow)%h %C(red)%ad%C(green)%d %C(reset)%s %C(blue)[%an]' --graph --date=short"
 
 # Bat
 alias bat="batcat"

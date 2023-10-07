@@ -5,12 +5,13 @@ ZSH_THEME="fino"
 #ZSH_THEME="gianu"
 
 plugins=(
+	fzf
 	git
 	ssh-agent
 	tmux
-	fzf
-	zsh-syntax-highlighting
+	z
 	zsh-autosuggestions
+	zsh-syntax-highlighting
 	zsh-transient-prompt
 )
 
@@ -27,6 +28,14 @@ unsetopt autocd
 # Init Bash autocomplete
 autoload -U bashcompinit
 bashcompinit
+
+# Init history completion from prefix
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 # Stop zsh from eating space before pipe symbol
 ZLE_REMOVE_SUFFIX_CHARS=""
