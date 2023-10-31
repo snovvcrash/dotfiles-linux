@@ -12,5 +12,8 @@ export PATH="$PATH:/usr/local/go/bin"
 # Nim
 export PATH="$HOME/.nimble/bin:$PATH"
 
+# wclang (OLLVM)
+export PATH="$HOME/tools/wclang/_prefix_/bin:$PATH"
+
 # tools
 echo -e '\n# tools\nexport PATH="$PATH'`find ~/tools /opt -maxdepth 1 -type d -printf ":%p"`'"' > ~/.dotfiles/system/tools

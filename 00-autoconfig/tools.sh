@@ -71,7 +71,7 @@ make && make install
 export PATH="`pwd`/_prefix_/bin:$PATH"
 ## Backup & replace clang libs
 sudo cp -R /lib/llvm-13/lib/clang/13.0.1/include/ /lib/llvm-13/lib/clang/13.0.1/include.backup/
-sudo cd ~/tools/ollvm/build/lib/clang/13.0.1/
+cd ~/tools/ollvm/build/lib/clang/13.0.1/
 sudo cp -R include/ /lib/llvm-13/lib/clang/13.0.1/
 ## Check
 x86_64-w64-mingw32-clang++ -v
