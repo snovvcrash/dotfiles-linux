@@ -1,0 +1,7 @@
+export VENV_DIR="$HOME/.venv"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+alias venv_ls='ls -la $VENV_DIR'
+alias venv_create='python3 -m venv $VENV_DIR/`basename $(pwd)` && source $VENV_DIR/`basename $(pwd)`/bin/activate'
+alias venv_rm='rm -rf $VENV_DIR/`basename $(pwd)`'
+alias venv='source "$VENV_DIR/`basename $(pwd)`/bin/activate"'

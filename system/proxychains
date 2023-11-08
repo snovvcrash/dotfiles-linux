@@ -1,0 +1,4 @@
+export PROXYCHAINS_PROFILE="default"
+export PROXYCHAINS_DIR="$HOME/.proxychains"
+
+alias proxy='proxychains4 -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf"'
