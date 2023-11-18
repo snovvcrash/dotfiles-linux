@@ -92,7 +92,7 @@ ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # async-git-info
 if [ "$ZSH_THEME" = "fino" ]; then

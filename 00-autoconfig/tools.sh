@@ -39,6 +39,9 @@ mkdir -p ~/tools/anew && eget -qs linux/amd64 "tomnomnom/anew" --to ~/tools/anew
 ## dex
 mkdir -p ~/tools/dex && eget -qs linux/amd64 "nixxxon/dex" --to ~/tools/dex
 
+# sshx
+curl -sSf https://sshx.io/get | sh
+
 # -- snap ------------------------------------------------------------
 
 sudo apt install snapd -y

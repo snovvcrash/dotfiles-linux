@@ -1,4 +1,10 @@
-export PROXYCHAINS_PROFILE="default"
 export PROXYCHAINS_DIR="$HOME/.proxychains"
 
+PROXYCHAINS_PROFILE=`basename $(pwd)`
+[[ -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf" ]] || PROXYCHAINS_PROFILE="default"
+export PROXYCHAINS_PROFILE
+
 alias proxy='proxychains4 -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf"'
+
+Proxychains_export() { [[ $# -eq 1 ]] && export PROXYCHAINS_PROFILE="$@" }
+complete -W "`find $PROXYCHAINS_DIR -mindepth 1 -maxdepth 1 -type f -execdir basename {} .conf ';'`" Proxychains_export
