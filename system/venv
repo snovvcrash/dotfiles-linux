@@ -6,5 +6,5 @@ alias Venv_create='python3 -m venv $VENV_DIR/`basename $(pwd)` && source $VENV_D
 alias Venv_activate='source "$VENV_DIR/`basename $(pwd)`/bin/activate"'
 alias Venv_rm='rm -rf $VENV_DIR/`basename $(pwd)`'
 
-venv() { [[ $# -eq 1 ]] && source "$VENV_DIR/$@/bin/activate" || venv_activate }
+venv() { [[ $# -eq 1 ]] && source "$VENV_DIR/$@/bin/activate" || Venv_activate }
 complete -W "`find $VENV_DIR -mindepth 1 -maxdepth 1 -type d -printf '%f '`" venv
