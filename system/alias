@@ -6,30 +6,31 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Python
-# alias pyclean="find . | grep -E \"(__pycache__|\.pyc|\.pyo$)\" | xargs rm -rf"
-alias pyclean="find . \( -name \"__pycache__\" -o -name \"*.pyc\" -o -name \"*.pyo\" -o -name \"build\" -o -name \"dist\" -o -name \"*.egg-info\" \) -prune -exec rm -rf {} \;"
-alias bpython3="python3 -m bpython"
+# alias pyclean='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
+alias pyclean='find . \( -name "__pycache__" -o -name "*.pyc" -o -name "*.pyo" -o -name "build" -o -name "dist" -o -name "*.egg-info" \) -prune -exec rm -rf {} \;'
+alias bpython3='python3 -m bpython'
 
 # Git
-alias gs="git status"
-alias gs-fm="git -c core.fileMode=false status"
-alias ga="git add"
-alias gb="git branch"
-alias gc="git commit"
-alias gc-fm="git -c core.fileMode=false commit"
-alias gd="git diff"
-alias gd-fm="git -c core.fileMode=false diff"
-alias gco="git checkout"
+alias gs='git status'
+alias gs-fm='git -c core.fileMode=false status'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gc-fm='git -c core.fileMode=false commit'
+alias gd='git diff'
+alias gd-fm='git -c core.fileMode=false diff'
+alias gco='git checkout'
+alias gp='git push origin'
 alias glo="git log --pretty=format:'%C(yellow)%h %C(red)%ad%C(green)%d %C(reset)%s %C(blue)[%an]' --graph --date=short"
 
 # Bat
-alias bat="batcat"
+alias bat='batcat'
 
 # Ranger
-alias ra="ranger"
+alias ra='ranger'
 
 # AppArmor
 alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* && sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*'
 
 # Clipboard
-alias xclip="xclip -i -sel clipboard"
+alias xclip='xclip -i -sel clipboard'
