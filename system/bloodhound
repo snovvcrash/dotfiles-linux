@@ -1,4 +1,5 @@
 alias Neo4j_ls='docker container ls -f name="neo4j-bh-*"'
+alias Neo4j_stop='docker container stop'
 
 Neo4j_start() {
 	local neo4j_container_name="neo4j-bh-`basename ../$(realpath ..)`"
