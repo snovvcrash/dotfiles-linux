@@ -27,7 +27,7 @@ Script() { script "${1}"`date "+%FT%H%M%S"`.script }
 crtsh() { curl -s "https://crt.sh/?q=%.${1}&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u }
 
 # fzf-based
-KillListener() { sudo lsof -i -n -P | grep LISTEN | tr -s ' ' | fzf -m --tac --reverse --cycle --height=~50% --preview-window=down:5% -d" " --preview 'echo "sudo kill -9 {2}"' | awk '{print $2}' | while read -r procId; do sudo kill -9 "$procId"; done }
+KillListener() { sudo lsof -i -n -P | grep LISTEN | tr -s ' ' | fzf --tac --reverse --cycle --height=~50% --preview-window=down:5% -d" " --preview 'echo "sudo kill -9 {2}"' | awk '{print $2}' | while read -r procId; do print -z "sudo kill -9 $procId"; done }
 
 #fzcode() { print -z `cat ~/.fzcode/{posts,ppn} | fzf --tac --cycle --height=~50% --color=16` }
 
