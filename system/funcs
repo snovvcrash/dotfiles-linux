@@ -43,6 +43,37 @@ Httpx-p() { print -z `(echo 'httpx -silent -random-agent -sc -fr -location -titl
 
 Katana() { print -z 'TLD="https://"; katana -d 5 -c 50 -p 20 -ef "ttf,woff,svg,jpeg,jpg,png,ico,gif,css" -cs "^.*\.?`echo $TLD | sed' "'s|https\?://||' | sed 's|/.*||'"'`.*$" -u $TLD' }
 
+# BloodHound
+alias Neo4j_ls='docker container ls -f name="neo4j-bh-*"'
+alias Neo4j_stop='docker container stop'
+Neo4j_start() {
+    local neo4j_container_name="neo4j-bh-`basename ../$(realpath ..)`"
+    docker run --rm --name $neo4j_container_name -d -p 7687:7687 -p 7474:7474 --env NEO4J_AUTH=neo4j/'Passw0rd!' -v `pwd`/neo4j:/data neo4j:4.4-community && (sleep 5; $HOME/tools/BloodHound/BloodHound --no-sandbox &)
+}
+
+# Payloads
+InflativeLoading() {
+    local payload=`basename ${1} ".exe"`
+    wine ~/tools/InflativeLoading/DumpPEFromMemory.exe "${1}" "/tmp/${payload}.bin"
+    python3 ~/tools/InflativeLoading/InflativeLoading.py -b "/tmp/${payload}.bin" -o "${payload}.pic"
+    rm "/tmp/${payload}.bin"
+}
+
+# Proxying
+export PROXYCHAINS_DIR="$HOME/.proxychains"
+
+PROXYCHAINS_PROFILE=`basename $(pwd)`
+[[ -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf" ]] || PROXYCHAINS_PROFILE="default"
+export PROXYCHAINS_PROFILE
+
+alias proxy='proxychains4 -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf"'
+alias Proxychains_ls='ls -la $PROXYCHAINS_DIR'
+
+Proxychains_new() { [[ $# -eq 1 ]] && (cp "$PROXYCHAINS_DIR/default.conf" "$PROXYCHAINS_DIR/$@.conf" && subl "$PROXYCHAINS_DIR/$@.conf") }
+Proxychains_export() { [[ $# -eq 1 ]] && export PROXYCHAINS_PROFILE="$@" }
+complete -W "`find $PROXYCHAINS_DIR -mindepth 1 -maxdepth 1 -type f -execdir basename {} .conf ';'`" Proxychains_export
+
+gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
+
 # Other
 nth() { sed ${1}'q;d' ${2} }
-gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }

@@ -1,7 +1,0 @@
-alias Neo4j_ls='docker container ls -f name="neo4j-bh-*"'
-alias Neo4j_stop='docker container stop'
-
-Neo4j_start() {
-	local neo4j_container_name="neo4j-bh-`basename ../$(realpath ..)`"
-	docker run --rm --name $neo4j_container_name -d -p 7687:7687 -p 7474:7474 --env NEO4J_AUTH=neo4j/'Passw0rd!' -v `pwd`/neo4j:/data neo4j:4.4-community && (sleep 5; $HOME/tools/BloodHound/BloodHound --no-sandbox &)
-}
