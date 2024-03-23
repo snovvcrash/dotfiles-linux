@@ -55,7 +55,7 @@ Neo4j_start() {
 InflativeLoading() {
     local payload=`basename ${1} ".exe"`
     wine ~/tools/InflativeLoading/DumpPEFromMemory.exe "${1}" "/tmp/${payload}.bin"
-    python3 ~/tools/InflativeLoading/InflativeLoading.py -b "/tmp/${payload}.bin" -o "${payload}.pic"
+    python3 ~/tools/InflativeLoading/InflativeLoading.py -b "/tmp/${payload}.bin" -o "${payload}.inflative" > /dev/null && echo "[+] Final shellcode -> ${payload}.inflative"
     rm "/tmp/${payload}.bin"
 }
 
