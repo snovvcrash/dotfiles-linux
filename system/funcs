@@ -69,7 +69,7 @@ export PROXYCHAINS_PROFILE
 alias proxy='proxychains4 -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf"'
 alias Proxychains_ls='ls -la $PROXYCHAINS_DIR'
 
-Proxychains_new() { [[ $# -eq 1 ]] && (cp "$PROXYCHAINS_DIR/default.conf" "$PROXYCHAINS_DIR/$@.conf" && subl "$PROXYCHAINS_DIR/$@.conf") }
+Proxychains_new() { [[ $# -eq 1 ]] && (echo 'strict_chain\nproxy_dns\nremote_dns_subnet 224\ntcp_read_time_out 15000\ntcp_connect_time_out 8000\n# localnet 127.0.0.0/255.0.0.0\n\n[ProxyList]\nsocks5 127.0.0.1 1080' > "$PROXYCHAINS_DIR/$@.conf" && subl "$PROXYCHAINS_DIR/$@.conf") }
 Proxychains_export() { [[ $# -eq 1 ]] && export PROXYCHAINS_PROFILE="$@" }
 complete -W "`find $PROXYCHAINS_DIR -mindepth 1 -maxdepth 1 -type f -execdir basename {} .conf ';'`" Proxychains_export
 
