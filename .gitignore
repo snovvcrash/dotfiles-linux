@@ -1,3 +1,5 @@
+system/tools
+
 # Sublime Text
 sublime/User*
 !sublime/User/Anaconda.sublime-settings

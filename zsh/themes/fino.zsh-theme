@@ -21,7 +21,8 @@ function proxychains_prompt_info() {
 }
 
 local prompt_char='$(prompt_char)'
-local git_info='${git_info_msg_0_}'
+#local git_info='${git_info_msg_0_}'
+local git_info='$(git_prompt_info)'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local ruby_info='$(ruby_prompt_info)'
 local proxychains_info='$(proxychains_prompt_info)'
