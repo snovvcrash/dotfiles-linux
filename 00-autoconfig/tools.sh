@@ -38,9 +38,14 @@ mkdir -p ~/tools/gruyere && eget -qs linux/amd64 "savannahostrowski/gruyere" --t
 mkdir -p ~/tools/anew && eget -qs linux/amd64 "tomnomnom/anew" --to ~/tools/anew
 ## dex
 mkdir -p ~/tools/dex && eget -qs linux/amd64 "nixxxon/dex" --to ~/tools/dex
+## tailspin
+mkdir -p ~/tools/tailspin && eget -qs linux/amd64 "bensadeh/tailspin" --to ~/tools/tailspin
 
 # sshx
 curl -sSf https://sshx.io/get | sh
+
+# croc
+curl https://getcroc.schollz.com | bash
 
 # -- snap ------------------------------------------------------------
 
