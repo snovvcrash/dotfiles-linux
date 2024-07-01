@@ -34,3 +34,6 @@ alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* &&
 
 # Clipboard
 alias xclip='xclip -i -sel clipboard'
+
+# Sublime
+alias s='subl'
