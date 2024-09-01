@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import sys
+import json
+import pickle
+from pprint import pprint
+
+textchars = bytearray({7,8,9,10,12,13,27} | set(range(0x20, 0x100)) - {0x7f})
+is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
+
+infile = sys.argv[1]
+if is_binary_string(open(infile, 'rb').read(1024)):
+	mode = 'rb'
+else:
+	mode = 'r'
+
+with open(infile, mode) as f:
+	try:
+		data = json.load(f)
+	except:
+		f.seek(0)
+		try:
+			data = pickle.load(f)
+		except:
+			f.seek(0)
+			data = f.read()
+
+try:
+	data = json.dumps(data, indent=2)
+except:
+	pprint(data)
+else:
+	print(data)
