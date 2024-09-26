@@ -5,7 +5,7 @@
 sudo apt install autossh -y
 sudo apt install bat -y
 sudo apt install clipman -y
-sudo apt install flameshot -y
+sudo apt install flameshot kazam -y
 sudo apt install jq -y
 sudo apt install keepassx -y
 sudo apt install mlocate -y
