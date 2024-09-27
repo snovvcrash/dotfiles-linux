@@ -1,31 +1,46 @@
 [user]
-	name = Sam Freeside
-	email = snovvcrash@protonmail.ch
-	signingkey = snovvcrash@protonmail.ch
+    name = Sam Freeside
+    email = snovvcrash@protonmail.ch
+    signingkey = snovvcrash@protonmail.ch
 
 [credential]
-	helper = cache
+    helper = cache
 
 [core]
-	editor = subl -n -w
-	autocrlf = input
-	# safecrlf = true
-	# filemode = false
+    editor = subl -n -w
+    autocrlf = input
+    # safecrlf = true
+    # filemode = false
+    pager = delta  # delta
 
 [commit]
-	gpgsign = true
+    gpgsign = true
 
 [tag]
-	gpgsign = true
+    gpgsign = true
 
 [pull]
-	rebase = false
+    rebase = false
+
+[merge]
+    conflictstyle = diff3  # delta
+
+[diff]
+    colorMoved = default  # delta
 
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	lo = log
-	type = cat-file -t
-	dump = cat-file -p
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    lo = log
+    type = cat-file -t
+    dump = cat-file -p
+
+[interactive]
+    diffFilter = delta --color-only  # delta
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true

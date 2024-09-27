@@ -1,9 +1,16 @@
 # Navigating around
 alias pls='sudo `fc -ln -1`'
-alias ll='ls -la'
+alias ll='lsd -la'
+alias ps='procs'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+alias ........='cd ../../../../../../..'
+alias .........='cd ../../../../../../../..'
+alias ..........='cd ../../../../../../../../..'
 
 # Python
 # alias pyclean='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'

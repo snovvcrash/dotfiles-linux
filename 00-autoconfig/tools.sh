@@ -2,8 +2,7 @@
 
 # -- apt -------------------------------------------------------------
 
-sudo apt install autossh -y
-sudo apt install bat -y
+sudo apt install bat lsd -y
 sudo apt install clipman -y
 sudo apt install flameshot kazam -y
 sudo apt install jq -y
@@ -19,7 +18,6 @@ sudo apt install timeshift -y
 sudo apt install tree -y
 sudo apt install xfce4-clipman -y
 sudo apt install bless -y
-sudo apt install icdiff -y
 
 # Sublime Text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -58,3 +56,4 @@ sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*
 
 sudo snap install codium --classic
 sudo snap install mdless
+sudo snap install procs
