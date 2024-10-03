@@ -46,6 +46,9 @@ curl -sSf https://sshx.io/get | sh
 # croc
 curl https://getcroc.schollz.com | bash
 
+# fun
+go install github.com/GeertJohan/gomatrix@latest
+
 # -- snap ------------------------------------------------------------
 
 sudo apt install snapd -y
