@@ -44,3 +44,6 @@ alias xclip='xclip -i -sel clipboard'
 
 # Sublime
 alias s='subl'
+
+# Fun
+alias knockknockneo='~/code/go/bin/gomatrix -k --fps 10'
