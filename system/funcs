@@ -7,7 +7,7 @@ complete -W "`find /sys/class/net/ -mindepth 1 -printf '%f '`" ipself
 done_as() { sed -i "1i# Done $(date +'%FT%H%M%S') as: $(fc -ln -1 | awk '{ $1=$1; }1')" $1 }
 
 # SSH
-Sshpass-p() { print -z "sshpass -p '' ssh -oStrictHostKeyChecking=no" }
+Sshpass-p() { print -z "sshpass -p '' ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes" }
 
 # PPN
 PPN() {
