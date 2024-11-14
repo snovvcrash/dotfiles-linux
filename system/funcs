@@ -75,5 +75,8 @@ complete -W "`find $PROXYCHAINS_DIR -mindepth 1 -maxdepth 1 -type f -execdir bas
 
 gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
 
+# klist
+TARGET() { klist | grep HOST | awk '{print $5}' | awk -F@ '{print $1}' | awk -F/ '{print $2}' }
+
 # Other
 nth() { sed ${1}'q;d' ${2} }
