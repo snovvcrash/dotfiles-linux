@@ -7,7 +7,8 @@ export SSH="$HOME/.ssh"
 # Ruby (MSF)
 export DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1
 
-# Colors for less
+# less
+export LESS="-i +g"
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
