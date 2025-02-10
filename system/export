@@ -8,7 +8,7 @@ export SSH="$HOME/.ssh"
 export DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1
 
 # less
-export LESS="-i +g"
+export LESS="-R -i"
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
