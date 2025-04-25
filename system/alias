@@ -1,7 +1,7 @@
 # Navigating around
 alias pls='sudo `fc -ln -1`'
-alias ll='lsd -la'
-alias ps='procs'
+#alias ll='lsd -la'  # eza + zsh-eza is better
+#alias ps='procs'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

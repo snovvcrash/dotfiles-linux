@@ -2,7 +2,7 @@
 
 # -- apt -------------------------------------------------------------
 
-sudo apt install bat lsd -y
+sudo apt install bat lsd -y  # (lcd or eza)
 sudo apt install clipman -y
 sudo apt install flameshot kazam -y
 sudo apt install jq -y
