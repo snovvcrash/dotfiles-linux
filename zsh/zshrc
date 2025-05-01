@@ -98,12 +98,17 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git'"
 export FZF_DEFAULT_OPTS="--highlight-line --info=inline-right --ansi --border=none"
-export FZF_CTRL_T_OPTS="--preview='less {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
-## (fzf-tab) Ensure colors match by using FZF_DEFAULT_OPTS
+export FZF_CTRL_R_OPTS="--border=rounded --tmux bottom,80%,45%"
+export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
+#export FZF_TMUX_OPTS="-p"
+
+## (fzf-tab)
+### Ensure colors match by using FZF_DEFAULT_OPTS
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
-## (fzf-tab) Preview file contents when tab completing directories
+### Preview content when tab completing
+#zstyle ":fzf-tab:complete:ls:*" fzf-preview "ls -p --color=always \${realpath} | grep /"
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color=always \${realpath}"
-## (fzf-tab) tmux popups
+### tmux popups
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-min-size 70 20
 
