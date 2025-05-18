@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentParser
+import sys
 
 from exdown import extract
 
-parser = ArgumentParser()
-parser.add_argument('input_md', help='input markdown file')
-args = parser.parse_args()
-
 if __name__ == '__main__':
-	code_blocks = extract(args.input_md)
-	for line, num in code_blocks:
-		print(line.strip())
+	code_blocks = extract(sys.argv[1])
+	for block in code_blocks:
+		for line in block.code.splitlines():
+			print(line.strip())

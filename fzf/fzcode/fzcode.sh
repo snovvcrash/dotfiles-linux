@@ -23,5 +23,5 @@ parse_ppn() {
 	done
 }
 
-#parse_ghpages_posts snovvcrash
+parse_ghpages_posts snovvcrash
 parse_ppn
