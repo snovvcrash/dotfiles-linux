@@ -1,0 +1,1 @@
+*/10 * * * * $HOME/.dotfiles/tmux/log_tmux_panes.sh
