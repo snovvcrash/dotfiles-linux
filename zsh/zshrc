@@ -105,6 +105,7 @@ export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --
 ## (fzf-tab)
 ### Fix z broken by fzf-tab
 zstyle ':completion:*:zshz:*' sort false
+#zstyle ':fzf-tab:complete:zshz:*' disabled-on any
 ### Ensure colors match by using FZF_DEFAULT_OPTS
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
 ### Preview content when tab completing
