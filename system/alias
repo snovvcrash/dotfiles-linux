@@ -20,8 +20,8 @@ alias py='python'
 alias py3='python3'
 alias bpy='bpython'
 alias bpy3='bpython3'
-alias ipa='py -m IPython --no-banner --no-confirm-exit'
-alias ipa3='py3 -m IPython --no-banner --no-confirm-exit'
+alias pyy='py -m IPython --no-banner --no-confirm-exit'
+alias pyy3='py3 -m IPython --no-banner --no-confirm-exit'
 
 # Git
 alias gs='git status'
