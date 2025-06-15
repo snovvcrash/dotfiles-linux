@@ -52,4 +52,4 @@ alias xclip='xclip -i -sel clipboard'
 alias s='subl'
 
 # Fun
-alias knockknockneo='~/code/go/bin/gomatrix -k --fps 10'
+alias follow-the-white-rabbit='~/code/go/bin/gomatrix -k --fps 9'
