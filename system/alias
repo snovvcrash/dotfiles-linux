@@ -36,6 +36,10 @@ alias gco='git checkout'
 alias gp='git push origin'
 alias glo="git log --pretty=format:'%C(yellow)%h %C(red)%ad%C(green)%d %C(reset)%s %C(blue)[%an]' --graph --date=short"
 
+# SSH
+alias myssh='ssh -oServerAliveInterval=300 -oServerAliveCountMax=3 -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes'
+alias myscp='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes'
+
 # Bat
 alias bat='batcat'
 
