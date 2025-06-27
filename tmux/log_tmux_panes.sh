@@ -10,10 +10,10 @@ remove_empty_lines_from_end_of_file() {
     printf '%s\n' "$temp" > "$file"
 }
 
-LOG_DIR="$HOME/tmux_logs/$(date +%Y-%m-%d)"
+LOG_DIR="$HOME/.tmux_logs/$(date +%Y-%m-%d)"
 mkdir -p "$LOG_DIR"
 
-DEBUG_LOG="$HOME/tmux_logs/cron_debug.log"
+DEBUG_LOG="$HOME/.tmux_logs/cron_debug.log"
 
 HISTORY_LIMIT="50000"
 
@@ -33,7 +33,7 @@ fi
 
 log_debug "[*] Found sessions: $SESSIONS"
 
-TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 
 for SESSION in $SESSIONS; do
     WINDOWS=$(tmux list-windows -t "$SESSION" -F "#{window_index}" 2>/dev/null)

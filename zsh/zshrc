@@ -102,15 +102,21 @@ export FZF_CTRL_R_OPTS="--wrap --height=~30%"
 export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
 #export FZF_TMUX_OPTS="-p"
 
+## Disable completion sorting for special cases
+zstyle ":completion:*:zshz:*" sort false
+zstyle ":completion:*:(Proxychains_open|Proxychains_export):*" sort false
+
 ## (fzf-tab)
 ### Fix z broken by fzf-tab
-zstyle ':completion:*:zshz:*' sort false
 #zstyle ':fzf-tab:complete:zshz:*' disabled-on any
 ### Ensure colors match by using FZF_DEFAULT_OPTS
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
 ### Preview content when tab completing
 #zstyle ":fzf-tab:complete:ls:*" fzf-preview "ls -p --color=always \${realpath} | grep /"
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color=always \${realpath}"
+zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" fzf-preview "tail -n 20 \${PROXYCHAINS_DIR}/\${word}.conf | batcat -n --color=always -l conf"
+zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" fzf-flags --preview-window=60% --border=none
+zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" popup-min-size 120 0
 ### tmux popups
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-min-size 70 20
