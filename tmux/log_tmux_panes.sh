@@ -36,22 +36,34 @@ log_debug "[*] Found sessions: $SESSIONS"
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 
 for SESSION in $SESSIONS; do
-    WINDOWS=$(tmux list-windows -t "$SESSION" -F "#{window_index}" 2>/dev/null)
+    WINDOWS=$(tmux list-windows -t "$SESSION" -F "#{window_index}:#{window_name}" 2>/dev/null)
 
-    for WINDOW in $WINDOWS; do
+    for WINDOW_INFO in $WINDOWS; do
+        WINDOW=$(echo "$WINDOW_INFO" | cut -d: -f1)
+        WINDOW_NAME=$(echo "$WINDOW_INFO" | cut -d: -f2)
+
         PANES=$(tmux list-panes -t "$SESSION:$WINDOW" -F "#{pane_index}" 2>/dev/null)
 
         for PANE in $PANES; do
-            TARGET="$SESSION:$WINDOW.$PANE"
+            TARGET="${SESSION}:${WINDOW}.${PANE}"
+            WINDOW_NAME=$(tmux display-message -t "$TARGET" -p "#{window_name}")
 
-            BASE_FILENAME="tmux-history-$SESSION-$WINDOW-$PANE"
-
-            TEMP_FILE="$LOG_DIR/${BASE_FILENAME}_${TIMESTAMP}.tmp"
+            BASE_FILENAME="${WINDOW_NAME}-${SESSION}-${WINDOW}-${PANE}"
+            TEMP_FILE="${LOG_DIR}/${BASE_FILENAME}_${TIMESTAMP}.tmp"
 
             log_debug "[*] Capturing pane: $TARGET to $TEMP_FILE"
 
             tmux capture-pane -J -S "-${HISTORY_LIMIT}" -p -t "$TARGET" > "$TEMP_FILE" 2>> "$DEBUG_LOG"
             remove_empty_lines_from_end_of_file "$TEMP_FILE"
+
+            FIRST_TS=$(grep -m 1 '\[[0-9][0-9]| *[0-9]\{1,2\}:[0-9][0-9]\] ❯' "$TEMP_FILE" | sed 's/.*\[\([0-9][0-9]| *[0-9]\{1,2\}:[0-9][0-9]\)\].*/\1/' | tr -d '|: ')
+            LAST_TS=$(grep '\[[0-9][0-9]| *[0-9]\{1,2\}:[0-9][0-9]\] ❯' "$TEMP_FILE" | tail -1 | sed 's/.*\[\([0-9][0-9]| *[0-9]\{1,2\}:[0-9][0-9]\)\].*/\1/' | tr -d '|: ')
+
+            if [ -n "$FIRST_TS" ] && [ -n "$LAST_TS" ]; then
+                TIMESTAMP_SUFFIX="${TIMESTAMP}_${FIRST_TS}-${LAST_TS}"
+            else
+                TIMESTAMP_SUFFIX="$TIMESTAMP"
+            fi
 
             sed -i "1i# Tmux log for session: $SESSION, window: $WINDOW, pane: $PANE\n# Captured at: $(date)\n\n" "$TEMP_FILE"
 
@@ -71,7 +83,7 @@ for SESSION in $SESSIONS; do
             fi
 
             if [ "$KEEP_NEW" -eq 1 ]; then
-                NEW_FILE="$LOG_DIR/${BASE_FILENAME}_${TIMESTAMP}.log"
+                NEW_FILE="$LOG_DIR/${BASE_FILENAME}_${TIMESTAMP_SUFFIX}.log"
 
                 mv "$TEMP_FILE" "$NEW_FILE"
 
