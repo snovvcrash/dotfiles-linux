@@ -15,7 +15,7 @@ mkdir -p "$LOG_DIR"
 
 DEBUG_LOG="$HOME/.tmux_logs/cron_debug.log"
 
-HISTORY_LIMIT="50000"
+HISTORY_LIMIT="100000"
 
 log_debug "[*] Starting tmux logging script"
 
