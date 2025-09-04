@@ -15,8 +15,13 @@ function virtualenv_prompt_info {
     echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${VIRTUAL_ENV:t}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
 }
 
+function krb5ccname_prompt_info() {
+    [[ -n "${KRB5CCNAME}" ]] || return
+    echo "${ZSH_THEME_KRB5CCNAME_PREFIX:=[}"`basename ${KRB5CCNAME:t} .ccache`"${ZSH_THEME_KRB5CCNAME_SUFFIX:=]}"
+}
+
 function proxychains_prompt_info() {
-    [[ "$PROXYCHAINS_PROFILE" != "default" ]] || return
+    [[ "${PROXYCHAINS_PROFILE}" != "default" ]] || return
     echo "${ZSH_THEME_PROXYCHAINS_PREFIX:=[}${PROXYCHAINS_PROFILE:t}${ZSH_THEME_PROXYCHAINS_SUFFIX:=]}"
 }
 
@@ -25,9 +30,10 @@ local prompt_char='$(prompt_char)'
 local git_info='$(git_prompt_info)'
 local virtualenv_info='$(virtualenv_prompt_info)'
 local ruby_info='$(ruby_prompt_info)'
+local krb5ccname_info='$(krb5ccname_prompt_info)'
 local proxychains_info='$(proxychains_prompt_info)'
 
-PROMPT="${FG[044]}$(user_name) ${FG[244]}on ${FG[147]}$(host_name) ${FG[244]}in %B${FG[227]}%~%b${git_info}${virtualenv_info}${ruby_info}${proxychains_info} ${FG[244]}at ${FG[252]}[%D{%d/%m} %D{%k:%M}]"
+PROMPT="${FG[044]}$(user_name) ${FG[244]}on ${FG[147]}$(host_name) ${FG[244]}in %B${FG[227]}%~%b${git_info}${virtualenv_info}${ruby_info}${krb5ccname_info}${proxychains_info} ${FG[244]}at ${FG[252]}[%D{%d/%m} %D{%k:%M}]"
 RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
 if [ "$(ps -ocommand= $PPID | awk '{print $1}')" = 'script' ]; then
@@ -46,6 +52,9 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}🐍"
 
 ZSH_THEME_RUBY_PROMPT_PREFIX=" ${FG[244]}ruby${FG[160]} "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}💎"
+
+ZSH_THEME_KRB5CCNAME_PREFIX=" ${FG[244]}krb${FG[214]} "
+ZSH_THEME_KRB5CCNAME_SUFFIX="%{$reset_color%}🦮"
 
 ZSH_THEME_PROXYCHAINS_PREFIX=" ${FG[244]}proxy${FG[111]} "
 ZSH_THEME_PROXYCHAINS_SUFFIX="%{$reset_color%}📡"
