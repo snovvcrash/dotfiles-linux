@@ -88,7 +88,17 @@ compdef _proxychains_export_completion Proxychains_open Proxychains_export
 
 gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
 
-# klist
+# Kerberos
+krb5ccname() { [[ $# -eq 1 ]] && export KRB5CCNAME=`realpath "$@.ccache"` }
+_krb5ccname_completion() {
+    local ccaches
+    ccaches=(${(f)"$(ls -t *.ccache 2>/dev/null | xargs -r basename -s .ccache)"})
+    _describe 'krb5 ccaches' ccaches
+}
+compdef _krb5ccname_completion krb5ccname
+
+Krb5_conf() { [[ $# -eq 1 ]] && export KRB5_CONFIG=`realpath "$@.conf"` }
+
 TARGET() { klist | grep HOST | awk '{print $5}' | awk -F@ '{print $1}' | awk -F/ '{print $2}' }
 
 # Other
