@@ -105,7 +105,7 @@ export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --
 ## Disable completion sorting for special cases
 zstyle ":completion:*:zshz:*" sort false
 zstyle ":completion:*:(Proxychains_open|Proxychains_export):*" sort false
-zstyle ":completion:*:(Krb5_ccname|Krb5_conf):*" sort false
+zstyle ":completion:*:(ww|Krb5conf_export):*" sort false
 
 ## (fzf-tab)
 ### Fix z broken by fzf-tab

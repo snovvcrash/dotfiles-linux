@@ -89,18 +89,25 @@ compdef _proxychains_export_completion Proxychains_open Proxychains_export
 gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
 
 # Kerberos
-Krb5_ccname() { [[ $# -eq 1 && -f "$1.ccache" ]] && export KRB5CCNAME=`realpath "$1.ccache"` || unset KRB5CCNAME }
+ww() {
+    if [[ $# -eq 1 && -f "$1.ccache" ]]; then
+        export KRB5CCNAME=`realpath "$1.ccache"`
+        export CCACHEHEX=`xxd -p "$KRB5CCNAME" | tr -d '\n'`
+    else
+        unset KRB5CCNAME; unset CCACHEHEX
+    fi
+}
 _krb5ccname_completion() {
     local dir="${words[CURRENT]%/*}/" prefix="${words[CURRENT]##*/}"
     [[ "$words[CURRENT]" != */* ]] && dir=""
-    ls -t "${dir}" | grep '\.ccache$' >/dev/null 2>&1 || return 1
+    ls -t ${dir}* >/dev/null 2>&1 | grep '\.ccache$' >/dev/null 2>&1 || return 1
     local ccaches=(${(f)"$(ls -t ${dir}*.ccache 2>/dev/null | xargs -r basename -s .ccache)"})
     [[ -n "${dir}" ]] && ccaches=("${ccaches[@]/#/$dir}")
     _describe 'krb5 ccaches' ccaches
 }
-compdef _krb5ccname_completion Krb5_ccname
+compdef _krb5ccname_completion ww
 
-Krb5_conf() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpath "$1.conf"` || unset KRB5_CONFIG }
+Krb5conf_export() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpath "$1.conf"` || unset KRB5_CONFIG }
 
 TARGET() { klist | grep HOST | awk '{print $5}' | awk -F@ '{print $1}' | awk -F/ '{print $2}' }
 
