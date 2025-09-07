@@ -105,6 +105,7 @@ export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --
 ## Disable completion sorting for special cases
 zstyle ":completion:*:zshz:*" sort false
 zstyle ":completion:*:(Proxychains_open|Proxychains_export):*" sort false
+zstyle ":completion:*:(Krb5_ccname|Krb5_conf):*" sort false
 
 ## (fzf-tab)
 ### Fix z broken by fzf-tab
@@ -116,7 +117,7 @@ zstyle ":fzf-tab:*" use-fzf-default-opts yes
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color=always \${realpath}"
 zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" fzf-preview "tail -n 20 \${PROXYCHAINS_DIR}/\${word}.conf | batcat -n --color=always -l conf"
 zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" fzf-flags --preview-window=60% --border=none
-zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" popup-min-size 120 0
+#zstyle ":fzf-tab:complete:(Proxychains_open|Proxychains_export):*" popup-min-size 120 0
 ### tmux popups
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-min-size 70 20

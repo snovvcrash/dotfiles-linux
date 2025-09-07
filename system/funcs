@@ -76,9 +76,9 @@ export PROXYCHAINS_PROFILE
 alias proxy='proxychains4 -f "$PROXYCHAINS_DIR/$PROXYCHAINS_PROFILE.conf"'
 alias Proxychains_ls='ls -la $PROXYCHAINS_DIR'
 
-Proxychains_new() { [[ $# -eq 1 ]] && (echo 'strict_chain\nproxy_dns\nremote_dns_subnet 224\ntcp_read_time_out 15000\ntcp_connect_time_out 8000\n# localnet 127.0.0.0/255.0.0.0\n\n[ProxyList]\nsocks5 127.0.0.1 10080' > "$PROXYCHAINS_DIR/$@.conf" && subl "$PROXYCHAINS_DIR/$@.conf") }
-Proxychains_open() { [[ $# -eq 1 ]] && subl "$PROXYCHAINS_DIR/$@.conf" }
-Proxychains_export() { [[ $# -eq 1 ]] && export PROXYCHAINS_PROFILE="$@" }
+Proxychains_new() { [[ $# -eq 1 ]] && (echo 'strict_chain\nproxy_dns\nremote_dns_subnet 224\ntcp_read_time_out 15000\ntcp_connect_time_out 8000\n# localnet 127.0.0.0/255.0.0.0\n\n[ProxyList]\nsocks5 127.0.0.1 10080' > "$PROXYCHAINS_DIR/$1.conf" && subl "$PROXYCHAINS_DIR/$1.conf") }
+Proxychains_open() { [[ $# -eq 1 && -f "$PROXYCHAINS_DIR/$1.conf" ]] && subl "$PROXYCHAINS_DIR/$1.conf" }
+Proxychains_export() { [[ $# -eq 1 && -f "$1" ]] && export PROXYCHAINS_PROFILE="$1" }
 _proxychains_export_completion() {
     local configs
     configs=(${(f)"$(ls -t "$PROXYCHAINS_DIR"/*.conf 2>/dev/null | xargs -r basename -s .conf)"})
@@ -89,15 +89,18 @@ compdef _proxychains_export_completion Proxychains_open Proxychains_export
 gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
 
 # Kerberos
-Krb5ccname() { [[ $# -eq 1 ]] && export KRB5CCNAME=`realpath "$@.ccache"` }
+Krb5_ccname() { [[ $# -eq 1 && -f "$1.ccache" ]] && export KRB5CCNAME=`realpath "$1.ccache"` || unset KRB5CCNAME }
 _krb5ccname_completion() {
-    local ccaches
-    ccaches=(${(f)"$(ls -t *.ccache 2>/dev/null | xargs -r basename -s .ccache)"})
+    local dir="${words[CURRENT]%/*}/" prefix="${words[CURRENT]##*/}"
+    [[ "$words[CURRENT]" != */* ]] && dir=""
+    ls -t "${dir}" | grep '\.ccache$' >/dev/null 2>&1 || return 1
+    local ccaches=(${(f)"$(ls -t ${dir}*.ccache 2>/dev/null | xargs -r basename -s .ccache)"})
+    [[ -n "${dir}" ]] && ccaches=("${ccaches[@]/#/$dir}")
     _describe 'krb5 ccaches' ccaches
 }
-compdef _krb5ccname_completion Krb5ccname
+compdef _krb5ccname_completion Krb5_ccname
 
-Krb5_conf() { [[ $# -eq 1 ]] && export KRB5_CONFIG=`realpath "$@.conf"` }
+Krb5_conf() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpath "$1.conf"` || unset KRB5_CONFIG }
 
 TARGET() { klist | grep HOST | awk '{print $5}' | awk -F@ '{print $1}' | awk -F/ '{print $2}' }
 

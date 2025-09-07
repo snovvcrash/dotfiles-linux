@@ -16,13 +16,11 @@ function virtualenv_prompt_info {
 }
 
 function krb5ccname_prompt_info() {
-    [[ -n "${KRB5CCNAME}" ]] || return
-    echo "${ZSH_THEME_KRB5CCNAME_PREFIX:=[}"`basename ${KRB5CCNAME:t} .ccache`"${ZSH_THEME_KRB5CCNAME_SUFFIX:=]}"
+    [[ -f "${KRB5CCNAME}" ]] && echo "${ZSH_THEME_KRB5CCNAME_PREFIX:=[}"`basename ${KRB5CCNAME:t} .ccache`"${ZSH_THEME_KRB5CCNAME_SUFFIX:=]}"
 }
 
 function proxychains_prompt_info() {
-    [[ "${PROXYCHAINS_PROFILE}" != "default" ]] || return
-    echo "${ZSH_THEME_PROXYCHAINS_PREFIX:=[}${PROXYCHAINS_PROFILE:t}${ZSH_THEME_PROXYCHAINS_SUFFIX:=]}"
+    [[ "${PROXYCHAINS_PROFILE}" != "default" && -f "${PROXYCHAINS_PROFILE}" ]] && echo "${ZSH_THEME_PROXYCHAINS_PREFIX:=[}${PROXYCHAINS_PROFILE:t}${ZSH_THEME_PROXYCHAINS_SUFFIX:=]}"
 }
 
 local prompt_char='$(prompt_char)'
