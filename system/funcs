@@ -97,7 +97,7 @@ ww() {
         unset KRB5CCNAME; unset CCACHEHEX
     fi
 }
-_krb5ccname_completion() {
+_krb5ccname_export_completion() {
     local dir="${words[CURRENT]%/*}/" prefix="${words[CURRENT]##*/}"
     [[ "$words[CURRENT]" != */* ]] && dir=""
     ls -t ${dir}* >/dev/null 2>&1 | grep '\.ccache$' >/dev/null 2>&1 || return 1
@@ -105,7 +105,7 @@ _krb5ccname_completion() {
     [[ -n "${dir}" ]] && ccaches=("${ccaches[@]/#/$dir}")
     _describe 'krb5 ccaches' ccaches
 }
-compdef _krb5ccname_completion ww
+compdef _krb5ccname_export_completion ww
 
 Krb5conf_export() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpath "$1.conf"` || unset KRB5_CONFIG }
 
