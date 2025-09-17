@@ -20,7 +20,7 @@ function krb5ccname_prompt_info() {
 }
 
 function proxychains_prompt_info() {
-    [[ "${PROXYCHAINS_PROFILE}" != "default" && -f "${PROXYCHAINS_PROFILE}" ]] && echo "${ZSH_THEME_PROXYCHAINS_PREFIX:=[}${PROXYCHAINS_PROFILE:t}${ZSH_THEME_PROXYCHAINS_SUFFIX:=]}"
+    [[ "${PROXYCHAINS_PROFILE}" != "default" ]] && echo "${ZSH_THEME_PROXYCHAINS_PREFIX:=[}${PROXYCHAINS_PROFILE:t}${ZSH_THEME_PROXYCHAINS_SUFFIX:=]}"
 }
 
 local prompt_char='$(prompt_char)'

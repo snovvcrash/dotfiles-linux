@@ -55,5 +55,8 @@ alias xclip='xclip -i -sel clipboard'
 # Sublime
 alias s='subl'
 
+# fd-find
+alias fd='fdfind'
+
 # Fun
 alias follow-the-white-rabbit='~/code/go/bin/gomatrix -k --fps 9'

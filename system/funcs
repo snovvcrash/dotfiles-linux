@@ -36,7 +36,8 @@ fzcode() {
     zle reset-prompt
 }
 zle -N fzcode
-bindkey '^P^P' fzcode
+#bindkey -r '^P^P'
+#bindkey '^P^P' fzcode
 
 SharpCollection() { print -z `curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r ".tree[].path" | grep \\.exe | while read line; do echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/$line -o ${line#*/}"; done | fzf --tac --height=~30%` }
 #SharpCollection() { curl -sSL "https://api.github.com/repos/Flangvik/SharpCollection/git/trees/master?recursive=1" | jq -r '.tree[] | select(.path | endswith(".exe")) | .path | split("/") | "\(.[0]) - \(.[1])"' | fzf -m --reverse --height=50% --preview-window=down:5% -d" - " --preview 'echo "curl -sSL https://github.com/Flangvik/SharpCollection/raw/master/"{1}"/"{2}" -o "{2}""' | awk -F' - ' '{print $1,$2}' | while read -r arch filename; do echo; wget https://github.com/Flangvik/SharpCollection/raw/master/$arch/$filename -O $filename; done }
@@ -78,13 +79,25 @@ alias Proxychains_ls='ls -la $PROXYCHAINS_DIR'
 
 Proxychains_new() { [[ $# -eq 1 ]] && (echo 'strict_chain\nproxy_dns\nremote_dns_subnet 224\ntcp_read_time_out 15000\ntcp_connect_time_out 8000\n# localnet 127.0.0.0/255.0.0.0\n\n[ProxyList]\nsocks5 127.0.0.1 10080' > "$PROXYCHAINS_DIR/$1.conf" && subl "$PROXYCHAINS_DIR/$1.conf") }
 Proxychains_open() { [[ $# -eq 1 && -f "$PROXYCHAINS_DIR/$1.conf" ]] && subl "$PROXYCHAINS_DIR/$1.conf" }
-Proxychains_export() { [[ $# -eq 1 && -f "$1" ]] && export PROXYCHAINS_PROFILE="$1" }
+Proxychains_export() { [[ $# -eq 1 && -f "$PROXYCHAINS_DIR/$1.conf" ]] && export PROXYCHAINS_PROFILE="$1" }
 _proxychains_export_completion() {
     local configs
     configs=(${(f)"$(ls -t "$PROXYCHAINS_DIR"/*.conf 2>/dev/null | xargs -r basename -s .conf)"})
     _describe 'proxychains configs' configs
 }
 compdef _proxychains_export_completion Proxychains_open Proxychains_export
+
+function fzf-export-proxychains() {
+    local selected
+    selected=`fd -H -L --type f '\.conf$' "$PROXYCHAINS_DIR" --format '{/.}' | fzf --tac --height=~30% --bind 'enter:accept+abort'`
+    if [[ $? -eq 0 && -n "$selected" ]]; then
+        export PROXYCHAINS_PROFILE="$selected"
+    fi
+    fzf-redraw-prompt
+}
+zle -N fzf-export-proxychains
+bindkey -r '^P^P'
+bindkey '^P^P' fzf-export-proxychains
 
 gtcp() { ~/tools/graftcp/local/mgraftcp --socks5="127.0.0.1:${1}" "${@:2}" }
 
@@ -108,6 +121,19 @@ _krb5ccname_export_completion() {
 compdef _krb5ccname_export_completion ww
 
 Krb5conf_export() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpath "$1.conf"` || unset KRB5_CONFIG }
+
+function fzf-export-krb5ccname() {
+    local selected
+    selected=`fd -H -L --type f '\.ccache$' | fzf --tac --height=~30% --bind 'enter:accept+abort'`
+    if [[ $? -eq 0 && -n "$selected" ]]; then
+        export KRB5CCNAME="$selected"
+        export CCACHEHEX=`xxd -p "$KRB5CCNAME" | tr -d '\n'`
+    fi
+    fzf-redraw-prompt
+}
+zle -N fzf-export-krb5ccname
+bindkey -r '^K^K'
+bindkey '^K^K' fzf-export-krb5ccname
 
 TARGET() { klist | grep HOST | awk '{print $5}' | awk -F@ '{print $1}' | awk -F/ '{print $2}' }
 

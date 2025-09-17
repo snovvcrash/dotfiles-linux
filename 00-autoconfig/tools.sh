@@ -11,7 +11,7 @@ sudo apt install mlocate -y
 sudo apt install ncdu -y
 sudo apt install remmina -y
 sudo apt install resolvconf -y
-sudo apt install ripgrep -y
+sudo apt install fd-find ripgrep -y
 sudo apt install simplescreenrecorder -y
 sudo apt install ssh-tools -y
 sudo apt install timeshift -y

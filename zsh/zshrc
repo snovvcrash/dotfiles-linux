@@ -5,14 +5,14 @@ ZSH_THEME="fino"
 #ZSH_THEME="gianu"
 
 plugins=(
-	git
-	ssh-agent
-	tmux
-	z
-	fzf-tab
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	zsh-transient-prompt
+    git
+    ssh-agent
+    tmux
+    z
+    fzf-tab
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-transient-prompt
 )
 
 # Disable URL string auto escape when pasting without quotes
@@ -96,7 +96,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git'"
+#export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git'"
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--highlight-line --info=inline-right --cycle --border=none"
 export FZF_CTRL_R_OPTS="--wrap --height=~30%"
 export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
@@ -123,19 +124,19 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-min-size 70 20
 
 # async-git-info
-if [ "$ZSH_THEME" = "fino" ]; then
-	source "$ZSH_CUSTOM/plugins/async-git-info/async-git-info.plugin.zsh"
-fi
+# if [ "$ZSH_THEME" = "fino" ]; then
+#     source "$ZSH_CUSTOM/plugins/async-git-info/async-git-info.plugin.zsh"
+# fi
 
 # Resolve DOTFILES_DIR
 if [ -d "$HOME/.dotfiles" ]; then
-	DOTFILES_DIR="$HOME/.dotfiles"
+    DOTFILES_DIR="$HOME/.dotfiles"
 else
-	echo "Unable to find dotfiles, exiting..."
-	return
+    echo "Unable to find dotfiles, exiting..."
+    return
 fi
 
 # Source dotfiles
 for DOTFILE in "$DOTFILES_DIR"/system/*; do
-	[ -f "$DOTFILE" ] && . "$DOTFILE"
+    [ -f "$DOTFILE" ] && . "$DOTFILE"
 done

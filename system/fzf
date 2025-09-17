@@ -1,0 +1,11 @@
+# https://github.com/junegunn/fzf/issues/3641#issuecomment-1962805763
+fzf-redraw-prompt() {
+    local precmd
+    for precmd in $precmd_functions; do
+        if command -v $precmd >/dev/null 2>&1; then
+            $precmd
+        fi
+    done
+    zle reset-prompt
+}
+zle -N fzf-redraw-prompt
