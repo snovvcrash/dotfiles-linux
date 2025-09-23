@@ -89,7 +89,7 @@ compdef _proxychains_export_completion Proxychains_open Proxychains_export
 
 function fzf-export-proxychains() {
     local selected
-    selected=`fd -H -L --type f '\.conf$' "$PROXYCHAINS_DIR" --format '{/.}' | fzf --tac --height=~30% --bind 'enter:accept+abort'`
+    selected=`fd -HILt f '\.conf$' "$PROXYCHAINS_DIR" -X ls -1t | xargs -r basename -s .conf | fzf --height=~30% --bind 'enter:accept+abort'`
     if [[ $? -eq 0 && -n "$selected" ]]; then
         export PROXYCHAINS_PROFILE="$selected"
     fi
@@ -124,7 +124,7 @@ Krb5conf_export() { [[ $# -eq 1 && -f "$1.conf" ]] && export KRB5_CONFIG=`realpa
 
 function fzf-export-krb5ccname() {
     local selected
-    selected=`fd -H -L --type f '\.ccache$' | fzf --tac --height=~30% --bind 'enter:accept+abort'`
+    selected=`fd -HILt f '\.ccache$' --strip-cwd-prefix -X ls -t | fzf --height=~30% --bind 'enter:accept+abort'`
     if [[ $? -eq 0 && -n "$selected" ]]; then
         export KRB5CCNAME="$selected"
         export CCACHEHEX=`xxd -p "$KRB5CCNAME" | tr -d '\n'`

@@ -97,7 +97,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 #export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git'"
-export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+export FZF_DEFAULT_COMMAND="fd -HLt f --strip-cwd-prefix -E .git"
 export FZF_DEFAULT_OPTS="--highlight-line --info=inline-right --cycle --border=none"
 export FZF_CTRL_R_OPTS="--wrap --height=~30%"
 export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
