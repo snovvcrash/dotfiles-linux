@@ -39,6 +39,8 @@ alias glo="git log --pretty=format:'%C(yellow)%h %C(red)%ad%C(green)%d %C(reset)
 # SSH
 alias myssh='ssh -oServerAliveInterval=300 -oServerAliveCountMax=3 -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes'
 alias myscp='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes'
+mysshpass() {sshpass -p "${1}" ssh -oServerAliveInterval=300 -oServerAliveCountMax=3 -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes "${@:2}"}
+myscppass() {sshpass -p "${1}" scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes "${@:2}"}
 
 # Bat
 alias bat='batcat'
