@@ -47,6 +47,9 @@ curl -sSf https://sshx.io/get | sh
 # croc
 curl https://getcroc.schollz.com | bash
 
+# witr
+curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
+
 # fun
 go install github.com/GeertJohan/gomatrix@latest
 
