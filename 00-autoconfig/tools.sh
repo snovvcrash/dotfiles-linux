@@ -50,6 +50,9 @@ curl https://getcroc.schollz.com | bash
 # witr
 curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
 
+# snitch
+curl -sSL https://raw.githubusercontent.com/karol-broda/snitch/master/install.sh | sh
+
 # fun
 go install github.com/GeertJohan/gomatrix@latest
 
