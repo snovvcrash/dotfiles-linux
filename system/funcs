@@ -32,10 +32,9 @@ psz() { ps -ef | fzf --bind 'ctrl-r:reload(ps -ef)' --bind 'enter:abort' --bind 
 KillListener() { sudo lsof -i -n -P | grep LISTEN | tr -s ' ' | fzf --tac --reverse --height=~30% --preview-window=down:5% -d" " --preview 'echo "sudo kill -9 {2}"' | awk '{print $2}' | while read -r procId; do print -z "sudo kill -9 $procId"; done }
 
 # Web
-Feroxbuster-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "feroxbuster -w $line -A -k -r -t 15 -n -u"; done | fzf --tac --height=~30%` }
+Feroxbuster-w() { print -z `([ -d ~/wordlists/SecLists ] && find ~/wordlists/SecLists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "feroxbuster -w $line -A -k -r -t 15 -n -u"; done | fzf --tac --height=~30%` }
 
-# mkdir -p ~/tools/ffuf && cd ~/tools/ffuf && wget https://github.com/six2dez/OneListForAll/raw/main/{onelistforallmicro,onelistforallshort}.txt
-Ffuf-w() { print -z `([ -d /usr/share/seclists ] && find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "ffuf -w $line -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' -ic -sf -r -c -t 15 -u"; done | fzf --tac --height=~30%` }
+Ffuf-w() { print -z `([ -d ~/wordlists/SecLists ] && find ~/wordlists/SecLists/Discovery/Web-Content -maxdepth 1 -type f || find /usr/share/wordlists/dirbuster/ -maxdepth 1 -type f) | sort | while read line; do echo "ffuf -w $line -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' -ic -sf -r -c -t 15 -u"; done | fzf --tac --height=~30%` }
 
 Httpx-p() { print -z `(echo 'httpx -silent -random-agent -sc -fr -location -title -server -td -method -ip -cname -cdn -p "80,81,443,1080,3000,3128,7001,7002,8080,8443,8888" -t 15 -l'; echo 'httpx -silent -random-agent -sc -fr -location -title -server -td -method -ip -cname -cdn -t 15 -l') | fzf --tac --height=~30%` }
 
