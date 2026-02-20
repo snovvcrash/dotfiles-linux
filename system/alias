@@ -1,7 +1,5 @@
 # Navigating around
-alias pls='sudo `fc -ln -1`'
 #alias ll='lsd -la'  # eza + zsh-eza is better
-#alias ps='procs'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -42,23 +40,15 @@ alias myscp='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIde
 mysshpass() {sshpass -p "${1}" ssh -oServerAliveInterval=300 -oServerAliveCountMax=3 -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes "${@:2}"}
 myscppass() {sshpass -p "${1}" scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oIdentitiesOnly=yes "${@:2}"}
 
-# Bat
-alias bat='batcat'
-
-# Ranger
-alias ra='ranger'
-
-# AppArmor
+# Helpers
+alias pls='sudo `fc -ln -1`'
 alias Apparmor_parser='sudo apparmor_parser -r /etc/apparmor.d/*snap-confine* && sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap*'
 
-# Clipboard
+# Tools
+alias bat='batcat'
+alias ra='ranger'
+alias ps='procs'
 alias xclip='xclip -i -sel clipboard'
-
-# Sublime
 alias s='subl'
-
-# fd-find
 alias fd='fdfind'
-
-# Fun
 alias follow-the-white-rabbit='~/code/go/bin/gomatrix -k --fps 9'
