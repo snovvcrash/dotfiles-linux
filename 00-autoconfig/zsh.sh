@@ -11,7 +11,7 @@ ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$ZSH/custom"
 DOTFILES_DIR="$HOME/.dotfiles"
 
-sudo apt install zsh -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo apt install zsh zoxide -y && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 git clone https://github.com/mafredri/zsh-async "$ZSH_CUSTOM/plugins/async"

@@ -8,7 +8,7 @@ plugins=(
     git
     ssh-agent
     tmux
-    z
+    #z (switched to zoxide)
     fzf-tab
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -103,14 +103,24 @@ export FZF_CTRL_R_OPTS="--wrap --height=~30%"
 export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
 #export FZF_TMUX_OPTS="-p"
 
+# zoxide
+eval "$(zoxide init zsh)"
+#zoxide import --from=z ~/.z
+## Fix zoxide broken by fzf-tab
+_zoxide_z_complete() {
+    compadd -S '' -M 'r:|=* l:|=*' -- ${(f)"$(zoxide query -l -- ${words[2]} 2>/dev/null)"}
+}
+compdef _zoxide_z_complete z
+
+# zstyle tweaks
 ## Disable completion sorting for special cases
-zstyle ":completion:*:zshz:*" sort false
+zstyle ":completion:*:z:*" sort false
 zstyle ":completion:*:(Proxychains_open|Proxychains_export):*" sort false
 zstyle ":completion:*:(ww|Krb5conf_export):*" sort false
 
-## (fzf-tab)
+## fzf-tab
 ### Fix z broken by fzf-tab
-#zstyle ':fzf-tab:complete:zshz:*' disabled-on any
+#zstyle ':fzf-tab:complete:z:*' disabled-on any
 ### Ensure colors match by using FZF_DEFAULT_OPTS
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
 ### Preview content when tab completing
