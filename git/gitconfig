@@ -1,7 +1,7 @@
 [user]
     name = Sam Freeside
     email = snovvcrash@protonmail.ch
-    signingkey = snovvcrash@protonmail.ch
+    signingkey = 03EBD3D7586AC3CA
 
 [credential]
     helper = cache
