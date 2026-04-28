@@ -51,7 +51,11 @@ curl https://getcroc.schollz.com | bash
 curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
 
 # snitch
-curl -sSL https://raw.githubusercontent.com/karol-broda/snitch/master/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/karol-broda/snitch/master/install.sh | sh
+
+# oneshot
+curl -fsSL https://raw.githubusercontent.com/forestnode-io/oneshot/master/install.sh | sudo sh
+oneshot completion zsh >> ~/.dotfiles/system/myfuncs
 
 # fun
 go install github.com/GeertJohan/gomatrix@latest
