@@ -130,6 +130,7 @@ zstyle ":completion:*:(ww|Krb5conf_export):*" sort false
 #zstyle ':fzf-tab:complete:z:*' disabled-on any
 ### Ensure colors match by using FZF_DEFAULT_OPTS
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
+zstyle ':fzf-tab:*' fzf-flags -i
 ### Preview content when tab completing
 #zstyle ":fzf-tab:complete:ls:*" fzf-preview "ls -p --color=always \${realpath} | grep /"
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color=always \${realpath}"
