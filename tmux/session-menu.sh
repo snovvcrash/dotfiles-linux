@@ -9,5 +9,5 @@ done | {
     while IFS= read -r line; do
         menu_args="$menu_args \"$line\""
     done
-    eval "tmux display-menu -M -T 'Sessions' -x M -y S $menu_args"
+    eval "tmux display-menu -O -M -T 'Sessions' -x M -y S $menu_args"
 }

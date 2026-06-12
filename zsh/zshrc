@@ -22,8 +22,15 @@ source $ZSH/oh-my-zsh.sh
 
 ######################### User configuration #########################
 
-# Disable history expansion (now we don't have to escape "!")
-set +o histexpand
+# History
+set +o histexpand               # Disable history expansion (now we don't have to escape "!")
+export HISTSIZE=50000           # History lines stored in memory
+export SAVEHIST=50000           # History lines stored on disk
+setopt EXTENDED_HISTORY         # Save history with timestamps
+setopt INC_APPEND_HISTORY_TIME  # Immediately append commands and track duration
+setopt HIST_IGNORE_ALL_DUPS     # Never add duplicate entries
+setopt HIST_IGNORE_SPACE        # Ignore commands that start with a space
+setopt HIST_REDUCE_BLANKS       # Remove unnecessary blank lines
 
 # Disable changing directory without "cd"
 unsetopt autocd
