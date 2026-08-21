@@ -1,10 +1,20 @@
 Host *
-    IgnoreUnknown UseKeychain
-    AddKeysToAgent yes
-    UseKeychain yes
-    ControlPath ~/.ssh/controlmasters/%r@%h:%p
-    ControlMaster auto
-    ControlPersist 10m
+    LogLevel=ERROR
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ConnectTimeout 20
+    IdentitiesOnly yes
+    # -oStrictHostKeyChecking=accept-new
+    StrictHostKeyChecking yes
+    HashKnownHosts no
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes +ssh-rsa
+    #IgnoreUnknown UseKeychain
+    #AddKeysToAgent yes
+    #UseKeychain yes
+    #ControlPath ~/.ssh/controlmasters/%r@%h:%p
+    #ControlMaster auto
+    #ControlPersist 10m
 Host gh
     User git
     HostName github.com
