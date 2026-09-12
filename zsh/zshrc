@@ -114,12 +114,17 @@ export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --
 #export FZF_TMUX_OPTS="-p"
 
 ci-tab() {
+  local oldb=$BUFFER
   if zle -l fzf-completion; then
     zle fzf-completion  # preserves fzf's ** trigger and its fallback chain
   else
     zle complete-word
   fi
-  (( CURSOR < $#BUFFER )) && CURSOR=$#BUFFER
+  if [[ $BUFFER != $oldb ]]; then
+    while (( CURSOR < $#BUFFER )) && [[ ${BUFFER[CURSOR+1]} != [[:space:]] ]]; do
+      (( CURSOR++ ))
+    done
+  fi
 }
 zle -N ci-tab
 bindkey '^I' ci-tab
