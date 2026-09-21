@@ -113,6 +113,7 @@ export FZF_CTRL_R_OPTS="--wrap --height=~30%"
 export FZF_CTRL_T_OPTS="--preview='batcat -n --color=always {}' --height=100% --bind shift-up:preview-page-up,shift-down:preview-page-down"
 #export FZF_TMUX_OPTS="-p"
 
+# Case-insensitive fzf-completion fix
 ci-tab() {
   local oldb=$BUFFER
   if zle -l fzf-completion; then
@@ -177,3 +178,9 @@ fi
 for DOTFILE in "$DOTFILES_DIR"/system/*; do
     [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
+
+# For Windows:
+# reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+# reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
+# reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "0" /f
+xset r rate 250 30
