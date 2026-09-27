@@ -1,5 +1,5 @@
 Host *
-    LogLevel=ERROR
+    #LogLevel=ERROR
     ServerAliveInterval 60
     ServerAliveCountMax 3
     ConnectTimeout 20
