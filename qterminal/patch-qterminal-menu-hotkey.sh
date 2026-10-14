@@ -1,281 +1,228 @@
 #!/usr/bin/env bash
-# patch-qterminal-menu-hotkey.sh
 #
-# Rebuilds qterminal from apt source so BOTH right-click context menus
-# (terminal area + tab bar) are triggered by a hotkey instead of right-click.
+# Rebuilds ONLY qtermwidget from apt source so that:
 #
-#   Terminal-area menu -> Ctrl+Shift+/
-#   Tab-bar menu        -> Ctrl+Alt+M
+#   * When an app owns the mouse (tmux with `set -g mouse on`, vim, ...):
+#       right-click  -> goes straight to the app (tmux paste), no menu
+#       Shift+RClick -> opens the terminal menu (escape hatch)
+#   * Otherwise (plain shell):
+#       right-click  -> the normal qterminal menu, unchanged
+#   * Tab bar: stock right-click menu (never conflicts with tmux).
+#
+# "tmux-detection" is done via the terminal's own mouse-tracking state
+# (DECSET 1000..1003) -- i.e. "an application currently owns the mouse" --
+# more reliable than process sniffing and it covers vim/htop too.
+#
+# qterminal itself stays the untouched distro package. The v2 hotkey
+# (Ctrl+Shift+M) was removed: it could never work, because the terminal
+# display claims key sequences via Qt's ShortcutOverride mechanism, which
+# suppresses QShortcuts over the terminal area. Shift+right-click replaces it.
+# If a v2-patched qterminal is installed, this script restores the stock one.
 #
 # Usage:
 #   chmod +x patch-qterminal-menu-hotkey.sh
 #   ./patch-qterminal-menu-hotkey.sh
 #
-# All work happens in /tmp/qterminal-hotkey-build, which is wiped and
-# re-created at the start of every run -- so this is safe to re-run
-# from scratch any time (old source/build artifacts never linger,
-# and nothing here is left behind for the OS to clean up later).
-# Requires deb-src lines enabled in your apt sources.
+# Everything happens in /tmp/qterminal-hotkey-build, wiped and re-created on
+# every run -- safe to re-run from scratch any time. Needs sudo and deb-src
+# (enabled automatically by this script).
+#
+# Undo everything:
+#   sudo apt-mark unhold libqtermwidget6-2 qtermwidget-data libqtermwidget-dev
+#   sudo apt-get install --allow-downgrades \
+#     libqtermwidget6-2=2.4.0-1 qtermwidget-data=2.4.0-1 libqtermwidget-dev=2.4.0-1
 
 set -euo pipefail
 
 WORKDIR="/tmp/qterminal-hotkey-build"
+EXPECTED_VERSION="2.4.0-1"
+HOLD_PKGS="libqtermwidget6-2 qtermwidget-data libqtermwidget-dev"
 
-echo "==> Cleaning up any previous run (starting fresh)"
+step() { echo; echo "==> $*"; }
+die()  { echo "ERROR: $*" >&2; exit 1; }
+
+[ "$(id -u)" -ne 0 ] || die "run as your normal user; sudo is called where needed"
+command -v apt-get >/dev/null 2>&1 || die "this script targets apt-based systems (Kali)"
+
+step "Checking installed version (sanity)"
+inst_v="$(dpkg-query -W -f'${Version}' qtermwidget 2>/dev/null || true)"
+if [ -n "$inst_v" ] && [ "$inst_v" != "$EXPECTED_VERSION" ]; then
+  echo "[warn] installed qtermwidget is $inst_v; patch anchors were verified"
+  echo "       against $EXPECTED_VERSION. The patcher fails loudly if they moved."
+fi
+
+step "Enabling deb-src if missing"
+enable_debsrc() {
+  if [ -f /etc/apt/sources.list.d/kali.sources ]; then
+    if grep -qE '^Types:.*\bdeb-src\b' /etc/apt/sources.list.d/kali.sources; then
+      echo "deb-src already enabled (kali.sources)"
+      return 0
+    fi
+    sudo cp -a /etc/apt/sources.list.d/kali.sources \
+         "/etc/apt/sources.list.d/kali.sources.bak.$(date +%Y%m%d%H%M%S)"
+    sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/kali.sources
+    grep -qE '^Types:.*\bdeb-src\b' /etc/apt/sources.list.d/kali.sources \
+      || die "could not edit Types: line in kali.sources -- add deb-src by hand"
+    echo "deb-src enabled in /etc/apt/sources.list.d/kali.sources (backup saved)"
+  elif grep -qE '^[[:space:]]*deb-src ' /etc/apt/sources.list 2>/dev/null; then
+    echo "deb-src already enabled (sources.list)"
+  elif grep -qE '^[[:space:]]*deb ' /etc/apt/sources.list 2>/dev/null; then
+    sudo cp -a /etc/apt/sources.list "/etc/apt/sources.list.bak.$(date +%Y%m%d%H%M%S)"
+    grep -E '^[[:space:]]*deb ' /etc/apt/sources.list | head -n1 \
+      | sed 's/^[[:space:]]*deb /deb-src /' | sudo tee -a /etc/apt/sources.list >/dev/null
+    echo "deb-src line appended to /etc/apt/sources.list (backup saved)"
+  else
+    die "no usable apt sources found -- enable deb-src manually and re-run"
+  fi
+}
+enable_debsrc
+
+step "apt update + build tools + build dependencies (needs sudo)"
+sudo apt-get update
+sudo apt-get install -y build-essential devscripts fakeroot
+sudo apt-get build-dep -y qtermwidget
+
+step "Fetching sources into $WORKDIR (wiped clean first)"
 rm -rf "$WORKDIR"
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
-echo "==> Working in $WORKDIR"
+apt-get source qtermwidget
+QW_DIR="$(find . -maxdepth 1 -type d -name 'qtermwidget-*' | head -n1)"
+[ -n "$QW_DIR" ] || die "could not find extracted qtermwidget-* source directory"
+echo "qtermwidget: $QW_DIR"
 
-# echo "==> Installing build dependencies (needs sudo)"
-# sudo apt-get update
-# sudo apt build-dep -y qterminal
-# sudo apt-get install -y devscripts python3
+step "Applying patches"
+python3 - "$QW_DIR" <<'PYEOF'
+import os
+import sys
 
-echo "==> Fetching qterminal source (needs deb-src enabled in sources.list)"
-apt-get source qterminal
 
-SRC_DIR=$(find . -maxdepth 1 -type d -name "qterminal-*" | head -n1)
-if [ -z "$SRC_DIR" ]; then
-  echo "ERROR: could not find extracted qterminal-* source directory."
-  echo "Make sure deb-src lines are uncommented in /etc/apt/sources.list, then:"
-  echo "  sudo apt-get update"
-  exit 1
-fi
-echo "==> Found source at $SRC_DIR"
+def patch(path, replacements, marker):
+    # newline="" keeps the file's own line endings instead of letting the
+    # platform translate them (matters on Windows; no-op on Linux)
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        src = f.read()
+    if marker in src:
+        print(f"[skip] {path}: already patched")
+        return
+    for old, new in replacements:
+        n = src.count(old)
+        if n != 1:
+            sys.exit(f"[FATAL] expected exactly 1 occurrence in {path}, found {n}:\n"
+                     f"{old[:200]}\n"
+                     f"Package version probably differs from 2.4.0. Apply by hand.")
+        src = src.replace(old, new, 1)
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(src)
+    print(f"[ok] patched {path}")
 
-TERMWIDGET_CPP="$SRC_DIR/src/termwidget.cpp"
-TABWIDGET_CPP="$SRC_DIR/src/tabwidget.cpp"
-TABWIDGET_H="$SRC_DIR/src/tabwidget.h"
 
-python3 - "$TERMWIDGET_CPP" "$TABWIDGET_CPP" "$TABWIDGET_H" <<'PYEOF'
-import sys, re
+qw_dir = sys.argv[1]
 
-termwidget_cpp, tabwidget_cpp, tabwidget_h = sys.argv[1:4]
+# Swallow the context-menu event while an application owns the mouse
+# (tmux/vim/... with mouse tracking on) so the right-click reaches the
+# application. Shift+right-click keeps the menu; without mouse tracking
+# nothing changes.
+qwh = os.path.join(qw_dir, "lib", "TerminalDisplay.h")
+patch(qwh, [
+    ("class QEvent;\nclass QGridLayout;\nclass QKeyEvent;",
+     "class QEvent;\nclass QGridLayout;\nclass QContextMenuEvent;\nclass QKeyEvent;"),
+    ("    void mouseMoveEvent( QMouseEvent* ) override;",
+     "    void mouseMoveEvent( QMouseEvent* ) override;\n"
+     "    void contextMenuEvent(QContextMenuEvent* event) override;"),
+], marker="contextMenuEvent(QContextMenuEvent* event) override;")
 
-# ---------------------------------------------------------------
-# 1) termwidget.cpp: replace right-click policy/connect with a hotkey
-# ---------------------------------------------------------------
-with open(termwidget_cpp, "r", encoding="utf-8") as f:
-    src = f.read()
+qwc = os.path.join(qw_dir, "lib", "TerminalDisplay.cpp")
+patch(qwc, [
+    ("#include <QClipboard>",
+     "#include <QClipboard>\n#include <QContextMenuEvent>"),
+    ("void TerminalDisplay::mousePressEvent(QMouseEvent* ev)",
+     "void TerminalDisplay::contextMenuEvent(QContextMenuEvent* event)\n"
+     "{\n"
+     "  // _mouseMarks == false means the foreground application owns the\n"
+     "  // mouse (mouse tracking enabled, e.g. tmux with `set -g mouse on`):\n"
+     "  // swallow the context-menu event so the right-click reaches the\n"
+     "  // application untouched. In every other case propagate as usual,\n"
+     "  // and Shift+right-click always opens the terminal menu.\n"
+     "  if (!_mouseMarks && !(event->modifiers() & Qt::ShiftModifier))\n"
+     "    event->accept();\n"
+     "  else\n"
+     "    event->ignore();\n"
+     "}\n"
+     "\n"
+     "void TerminalDisplay::mousePressEvent(QMouseEvent* ev)"),
+], marker="void TerminalDisplay::contextMenuEvent(QContextMenuEvent* event)")
 
-if "QShortcut" not in src.split("customContextMenuCall")[0]:
-    # add includes near the top, right after the first #include block
-    src = src.replace(
-        '#include <QMenu>',
-        '#include <QMenu>\n#include <QShortcut>\n#include <QCursor>',
-        1
-    )
-
-old_block = """    setContextMenuPolicy(Qt::CustomContextMenu);
-
-    if(Properties::Instance()->swapMouseButtons2and3)
-    {
-        connect(this, &QWidget::customContextMenuRequested,
-                this, &TermWidgetImpl::pasteSelection);
-    }
-    else
-    {
-        connect(this, &QWidget::customContextMenuRequested,
-                this, &TermWidgetImpl::customContextMenuCall);
-    }"""
-
-new_block = """    setContextMenuPolicy(Qt::NoContextMenu);
-
-    if(Properties::Instance()->swapMouseButtons2and3)
-    {
-        // right-click paste-on-click behavior left disabled here;
-        // re-add in mousePressEvent if you rely on it
-    }
-
-    QShortcut *menuShortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_Slash), this);
-    connect(menuShortcut, &QShortcut::activated, this, [this]() {
-        customContextMenuCall(mapFromGlobal(QCursor::pos()));
-    });"""
-
-if old_block in src:
-    src = src.replace(old_block, new_block, 1)
-    print(f"[ok] patched {termwidget_cpp}")
-else:
-    print(f"[FATAL] expected block not found verbatim in {termwidget_cpp} "
-          f"(package version may differ). Aborting before build -- "
-          f"edit that file by hand, see script comments for the intended change.")
-    sys.exit(1)
-
-with open(termwidget_cpp, "w", encoding="utf-8") as f:
-    f.write(src)
-
-# ---------------------------------------------------------------
-# 2) tabwidget.cpp: split out showSessionMenu(), add shortcut
-# ---------------------------------------------------------------
-with open(tabwidget_cpp, "r", encoding="utf-8") as f:
-    src = f.read()
-
-if "QShortcut" not in src:
-    src = src.replace(
-        "#include <QMenu>",
-        "#include <QMenu>\n#include <QShortcut>",
-        1
-    )
-
-old_fn = """void TabWidget::contextMenuEvent(QContextMenuEvent *event)
-{
-    int tabIndex = tabBar()->tabAt(tabBar()->mapFrom(this, event->pos()));
-    if (tabIndex == -1) {
-        tabIndex = currentIndex();
-    }
-    if (tabIndex == -1) {
-        return;
-    }
-
-    QMenu menu(this);
-    QMap< QString, QAction * > actions = findParent<MainWindow>(this)->leaseActions();
-
-    QAction *close = menu.addAction(QIcon::fromTheme(QStringLiteral("document-close")), tr("Close session"));
-    QAction *rename = menu.addAction(actions[QLatin1String(RENAME_SESSION)]->text());
-    QAction *changeColor = menu.addAction(QIcon::fromTheme(QStringLiteral("color-management")), tr("Change title color"));
-    rename->setShortcut(actions[QLatin1String(RENAME_SESSION)]->shortcut());
-    rename->blockSignals(true);
-
-    QAction *action = menu.exec(event->globalPos());
-    if (action == close) {
-        emit tabCloseRequested(tabIndex);
-    } else if (action == rename) {
-        emit tabRenameRequested(tabIndex);
-    } else if (action == changeColor) {
-        emit tabTitleColorChangeRequested(tabIndex);
-    }
-}"""
-
-new_fn = """void TabWidget::showSessionMenu(const QPoint &globalPos, int tabIndex)
-{
-    if (tabIndex == -1) {
-        return;
-    }
-
-    QMenu menu(this);
-    QMap< QString, QAction * > actions = findParent<MainWindow>(this)->leaseActions();
-
-    QAction *close = menu.addAction(QIcon::fromTheme(QStringLiteral("document-close")), tr("Close session"));
-    QAction *rename = menu.addAction(actions[QLatin1String(RENAME_SESSION)]->text());
-    QAction *changeColor = menu.addAction(QIcon::fromTheme(QStringLiteral("color-management")), tr("Change title color"));
-    rename->setShortcut(actions[QLatin1String(RENAME_SESSION)]->shortcut());
-    rename->blockSignals(true);
-
-    QAction *action = menu.exec(globalPos);
-    if (action == close) {
-        emit tabCloseRequested(tabIndex);
-    } else if (action == rename) {
-        emit tabRenameRequested(tabIndex);
-    } else if (action == changeColor) {
-        emit tabTitleColorChangeRequested(tabIndex);
-    }
-}
-
-void TabWidget::contextMenuEvent(QContextMenuEvent *event)
-{
-    if (event->reason() == QContextMenuEvent::Mouse) {
-        // right-click: intentionally ignored, use Ctrl+Alt+M instead
-        return;
-    }
-    int tabIndex = tabBar()->tabAt(tabBar()->mapFrom(this, event->pos()));
-    if (tabIndex == -1) {
-        tabIndex = currentIndex();
-    }
-    showSessionMenu(event->globalPos(), tabIndex);
-}"""
-
-if old_fn in src:
-    src = src.replace(old_fn, new_fn, 1)
-    print(f"[ok] patched {tabwidget_cpp} (split contextMenuEvent)")
-else:
-    print(f"[FATAL] expected block not found verbatim in {tabwidget_cpp} "
-          f"(package version may differ). Aborting before build -- "
-          f"edit that file by hand, see script comments for the intended change.")
-    sys.exit(1)
-
-# add shortcut wiring inside the constructor: look for "TabWidget::TabWidget("
-ctor_marker = re.search(r"TabWidget::TabWidget\([^\)]*\)\s*(?::[^\{]*)?\{", src)
-if ctor_marker and "tabMenuShortcut" not in src:
-    insert_pos = ctor_marker.end()
-    shortcut_code = """
-    QShortcut *tabMenuShortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_M), this);
-    connect(tabMenuShortcut, &QShortcut::activated, this, [this]() {
-        showSessionMenu(mapToGlobal(tabBar()->tabRect(currentIndex()).center()), currentIndex());
-    });
-"""
-    src = src[:insert_pos] + shortcut_code + src[insert_pos:]
-    print(f"[ok] added tab-menu shortcut into TabWidget constructor")
-else:
-    print("[warn] could not locate TabWidget constructor to insert shortcut -- add manually")
-
-with open(tabwidget_cpp, "w", encoding="utf-8") as f:
-    f.write(src)
-
-# ---------------------------------------------------------------
-# 3) tabwidget.h: add the new method declaration
-# ---------------------------------------------------------------
-with open(tabwidget_h, "r", encoding="utf-8") as f:
-    hsrc = f.read()
-
-if "showSessionMenu" not in hsrc:
-    # tolerant of extra whitespace / "override" / const, across qterminal versions
-    m = re.search(r'[ \t]*void\s+contextMenuEvent\s*\(\s*QContextMenuEvent\s*\*\s*\w*\s*\)[^\n;]*;', hsrc)
-    if m:
-        indent_match = re.match(r'[ \t]*', m.group(0))
-        indent = indent_match.group(0) if indent_match else "    "
-        insertion = f"{indent}void showSessionMenu(const QPoint &globalPos, int tabIndex);\n"
-        hsrc = hsrc[:m.start()] + insertion + hsrc[m.start():]
-        print(f"[ok] added showSessionMenu declaration to {tabwidget_h}")
-    else:
-        print(f"[FATAL] could not find contextMenuEvent declaration in {tabwidget_h}.")
-        print("        Add this line manually inside 'class TabWidget', under 'protected:':")
-        print("        void showSessionMenu(const QPoint &globalPos, int tabIndex);")
-        sys.exit(1)
-
-with open(tabwidget_h, "w", encoding="utf-8") as f:
-    f.write(hsrc)
-
-print("Patching pass complete.")
+print("All patches applied.")
 PYEOF
 
-echo "==> Bumping changelog so apt won't silently revert this build"
-cd "$SRC_DIR"
-DEBEMAIL="local@localhost" DEBFULLNAME="Local Hotkey Patch" dch -i "Rebind context menus to hotkeys instead of right-click (local patch)"
+step "Building qtermwidget (can take a few minutes)"
+( cd "$QW_DIR"
+  DEBEMAIL="local@localhost" DEBFULLNAME="Local qtermwidget patch" \
+    dch --local nomenu "Let right-click pass through to mouse-capturing apps (tmux) instead of opening the context menu"
+  dpkg-buildpackage -us -uc -b -j"$(nproc)"
+)
 
-echo "==> Building .deb packages (this can take a few minutes)"
-dpkg-buildpackage -us -uc -b
-
-cd ..
-echo "==> Build artifacts:"
+step "Built packages:"
 ls -1 ./*.deb
 
-echo "==> Installing patched packages (needs sudo)"
-sudo dpkg -i ./qterminal_*.deb ./qterminal-*.deb 2>/dev/null || sudo apt-get install -f -y
+debs=(./libqtermwidget6-2_*.deb ./qtermwidget-data_*.deb ./libqtermwidget-dev_*.deb)
+for f in "${debs[@]}"; do
+  [ -e "$f" ] || die "expected built package $f not found -- see output above"
+done
 
-echo "==> Holding qterminal so future 'apt upgrade' won't overwrite this build"
-sudo apt-mark hold qterminal qterminal-common 2>/dev/null || true
+step "Installing patched packages (needs sudo)"
+sudo apt-get install -y "${debs[@]}"
 
-cat <<'EOM'
+step "Holding packages so 'apt upgrade' won't overwrite this build"
+sudo apt-mark hold $HOLD_PKGS
 
-==> Done.
+# If a v2 build (with the dead Ctrl+Shift+M hotkey) is installed, put the
+# stock qterminal back.
+step "Restoring stock qterminal if a locally patched one is installed"
+qtv="$(dpkg-query -W -f'${Version}' qterminal 2>/dev/null || true)"
+sudo apt-mark unhold qterminal qterminal-l10n >/dev/null 2>&1 || true
+case "$qtv" in
+  *nomenu*)
+    sudo apt-get install -y --allow-downgrades \
+      "qterminal=$EXPECTED_VERSION" "qterminal-l10n=$EXPECTED_VERSION"
+    echo "stock qterminal $EXPECTED_VERSION restored"
+    ;;
+  *)
+    echo "qterminal is ${qtv:-not installed} -- already stock, nothing to restore"
+    ;;
+esac
 
-New behavior:
-  - Right-click in the terminal area: no menu. Press Ctrl+Shift+/
-    to open it instead.
-  - Right-click on a tab: no menu. Press Ctrl+Alt+M to open it
-    for the current tab.
+cat <<EOM
 
-If a [warn] appeared above for either file, the exact source text
-didn't match what this script expects (likely a different qterminal
-version) -- open the file under /tmp/qterminal-hotkey-build/qterminal-*/src/
-and apply the equivalent change by hand, then run
-"dpkg-buildpackage -us -uc -b" from inside that source folder yourself.
-(Just re-running this script from scratch will wipe your manual edit.)
+==> Done. Close ALL qterminal windows and start it again (the library is
+    loaded at process start).
 
-To undo later:
-  sudo apt-mark unhold qterminal qterminal-common
-  sudo apt-get install --reinstall qterminal
+New behavior (qterminal itself is the untouched distro package):
+  - tmux/vim/... with mouse on:
+      right-click   -> goes to the app (tmux paste), no menu
+      Shift+RClick  -> opens the terminal menu (escape hatch)
+  - plain shell:
+      right-click   -> normal menu, unchanged
+  - tab bar:
+      right-click   -> normal menu, unchanged
+
+Test:
+  tmux new -s t   # with  set -g mouse on  in ~/.tmux.conf
+  copy something, right-click inside tmux -> pastes
+  Shift+right-click inside tmux -> terminal menu opens
+
+Undo:
+  sudo apt-mark unhold $HOLD_PKGS
+  sudo apt-get install --allow-downgrades \\
+    libqtermwidget6-2=$EXPECTED_VERSION qtermwidget-data=$EXPECTED_VERSION \\
+    libqtermwidget-dev=$EXPECTED_VERSION
+
+When Kali ships a newer qtermwidget (e.g. 2.5.0), the held packages stay on
+2.4.0 until you re-run this script (it will need new anchors if upstream
+moved the patched lines -- it fails loudly, never silently).
+
+tmux side: right-click paste must be bound there, e.g. in ~/.tmux.conf:
+  set -g mouse on
+  bind -n MouseDown3Pane paste-buffer
 EOM
-
-sudo apt install --reinstall kali-themes
