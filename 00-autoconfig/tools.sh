@@ -85,3 +85,8 @@ sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://b
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
 sudo apt install brave-browser
+
+# -- extensions.gnome.org --------------------------------------------
+
+# https://extensions.gnome.org/extension/5410/grand-theft-focus/
+# https://extensions.gnome.org/extension/5278/pano/
