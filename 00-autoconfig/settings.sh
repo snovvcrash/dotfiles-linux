@@ -8,7 +8,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33   # 1000
 ### Xfce
 xfconf-query -c keyboards -p /Default/KeyRepeat/Delay --create -t int -s 250
 xfconf-query -c keyboards -p /Default/KeyRepeat/Rate  --create -t int -s 30
-## For Windows:
-## reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
-## reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
-## reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "0" /f
+### Windows
+# Set-ItemProperty 'HKCU:\Control Panel\Keyboard' -Name KeyboardDelay -Value '0'   # 0-3 = 250/500/750/1000 ms
+# Set-ItemProperty 'HKCU:\Control Panel\Keyboard' -Name KeyboardSpeed -Value '31'  # 0-31 ≈ 2.5-30 repeats/sec
